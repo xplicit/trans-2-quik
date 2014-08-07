@@ -48,6 +48,7 @@
     <Compile Include="Entities\Trade\TradeMode.cs" />
     <Compile Include="Entities\Trade\TradePeriod.cs" />
     <Compile Include="Entities\Trade\TradeTimeType.cs" />
+    <Compile Include="Gateway.cs" />
     <Compile Include="Internals\EntryPoint.cs" />
     <Compile Include="Internals\ExecHelper.cs" />
     <Compile Include="Internals\OrderEntryPoint.cs" />
@@ -62,6 +63,9 @@
     <Compile Include="ReturnValues\CallResult.cs" />
     <Compile Include="ReturnValues\ReturnValue.cs" />
     <Compile Include="ReturnValues\TransactionCallResult.cs" />
+    <Compile Include="Watchers\ConnectionWatcher.cs" />
+    <Compile Include="Watchers\OrderWatcher.cs" />
+    <Compile Include="Watchers\TradeWatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
