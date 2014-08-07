@@ -1,4 +1,4 @@
-﻿namespace Trans2Quik.Core
+﻿namespace Trans2Quik.Core.Internals
 {
     using System;
     using System.Runtime.InteropServices;
@@ -120,11 +120,11 @@
             return new TransactionCallResult(
                 new ReturnValue(res),
                 errCode,
-                TypeConvertor.ByteToString(errMessage),
+                TypeConverter.ByteToString(errMessage),
                 replyCode,
                 transId,
                 orderNum,
-                TypeConvertor.ByteToString(resMessage));
+                TypeConverter.ByteToString(resMessage));
         }
 
         public static ReturnValue SubscribeOrders(string classCode, string secCode)
@@ -163,7 +163,6 @@
             return new ReturnValue(res);
         }
 
-        # region Dll Import
         [DllImport(CONST_DllName, EntryPoint = CONST_Connect, CallingConvention = CallingConvention.StdCall)]
         private static extern Int32 ConnectImpl(string connectionParamsString, ref Int32 extendedErrorCode, byte[] errorMessage, UInt32 errorMessageSize);
 
@@ -235,7 +234,7 @@
             var errCode = 0;
             var message = new byte[CONST_MessageSize];
             var res = callDelegate(ref errCode, message, CONST_MessageSize);
-            return new CallResult(new ReturnValue(res), errCode, TypeConvertor.ByteToString(message));
+            return new CallResult(new ReturnValue(res), errCode, TypeConverter.ByteToString(message));
         }
 
         private static CallResult Call<T>(CallDelegate<T> callDelegate, T parameter)
@@ -243,7 +242,7 @@
             var errCode = 0;
             var message = new byte[CONST_MessageSize];
             var res = callDelegate(parameter, ref errCode, message, CONST_MessageSize);
-            return new CallResult(new ReturnValue(res), errCode, TypeConvertor.ByteToString(message));
+            return new CallResult(new ReturnValue(res), errCode, TypeConverter.ByteToString(message));
         }
     }
 }

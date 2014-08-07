@@ -33,8 +33,47 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="EntryPoint.cs" />
+    <Compile Include="Entities\Direction.cs" />
+    <Compile Include="Entities\Order\Order.cs" />
+    <Compile Include="Entities\Order\OrderDetails.cs" />
+    <Compile Include="Entities\Order\OrderEventArgs.cs" />
+    <Compile Include="Entities\Order\OrderMode.cs" />
+    <Compile Include="Entities\Order\OrderPeriod.cs" />
+    <Compile Include="Entities\Order\OrderStatus.cs" />
+    <Compile Include="Entities\Order\OrderTimeType.cs" />
+    <Compile Include="Entities\Trade\Trade.cs" />
+    <Compile Include="Entities\Trade\TradeDetails.cs" />
+    <Compile Include="Entities\Trade\TradeEventArgs.cs" />
+    <Compile Include="Entities\Trade\TradeKind.cs" />
+    <Compile Include="Entities\Trade\TradeMode.cs" />
+    <Compile Include="Entities\Trade\TradePeriod.cs" />
+    <Compile Include="Entities\Trade\TradeTimeType.cs" />
+    <Compile Include="Internals\EntryPoint.cs" />
+    <Compile Include="Internals\ExecHelper.cs" />
+    <Compile Include="Internals\OrderEntryPoint.cs" />
+    <Compile Include="Internals\TradeEntryPoint.cs" />
+    <Compile Include="Internals\TypeConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ReturnValues\CallResult.cs" />
+    <Compile Include="ReturnValues\ReturnValue.cs" />
+    <Compile Include="ReturnValues\TransactionCallResult.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="_External\TRANS2QUIK.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="_External\TRANS2QUIK.lib" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
