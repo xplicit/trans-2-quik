@@ -1,0 +1,21 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Trans2Quik.Adapter</id>
+    <title>Trans2Quik .NET adapter for Quik trade terminal</title>
+    <version>1.0.0</version>
+    <authors>Rootzid</authors>
+    <owners>Rootzid</owners>
+    <description>Trans2Quik .NET adapter for Quik trade terminal</description>
+    <releaseNotes>This release supports Orders and Trades.</releaseNotes>
+    <copyright>Copyright 2014</copyright>
+    <language>en-US</language>
+    <projectUrl>https://github.com/rootzid/trans-2-quik</projectUrl>
+    <tags>Quik Trading</tags>
+  </metadata>
+  <files>
+    <file src="bin\Trans2Quik.Core.dll" target="lib\net45" />
+    <file src="..\External\TRANS2QUIK.dll" target="content" />
+    <file src="..\External\TRANS2QUIK.lib" target="content" />
+  </files>
+</package>

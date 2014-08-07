@@ -17,7 +17,7 @@
 
         public TradeWatcher()
         {
-            this.tradeStatusCallback = this.TradeStatusCallback;
+            this.tradeStatusCallback = new EntryPoint.TradeStatusCallback(this.TradeStatusCallback);
             GCHandle.Alloc(this.tradeStatusCallback);
         }
 
@@ -51,6 +51,8 @@
                 Int32 isSell,
                 Int32 tradeDescriptor)
         {
+            Console.WriteLine("TradeStatusCallback");
+
             var trade = new Trade()
             {
                 Mode = (TradeMode)mode,
