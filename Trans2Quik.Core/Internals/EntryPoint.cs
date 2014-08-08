@@ -228,7 +228,6 @@
 
         private delegate Int32 CallDelegate(ref Int32 extendedErrorCode, byte[] errorMessage, UInt32 errorMessageSize);
         private delegate Int32 CallDelegate<in T>(T parameter, ref Int32 extendedErrorCode, byte[] errorMessage, UInt32 errorMessageSize);
-
         private static CallResult Call(CallDelegate callDelegate)
         {
             var errCode = 0;
@@ -236,7 +235,6 @@
             var res = callDelegate(ref errCode, message, CONST_MessageSize);
             return new CallResult(new ReturnValue(res), errCode, TypeConverter.ByteToString(message));
         }
-
         private static CallResult Call<T>(CallDelegate<T> callDelegate, T parameter)
         {
             var errCode = 0;

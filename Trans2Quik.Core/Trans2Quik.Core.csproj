@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -48,7 +49,7 @@
     <Compile Include="Entities\Trade\TradeMode.cs" />
     <Compile Include="Entities\Trade\TradePeriod.cs" />
     <Compile Include="Entities\Trade\TradeTimeType.cs" />
-    <Compile Include="Gateway.cs" />
+    <Compile Include="TransactionGateway.cs" />
     <Compile Include="Internals\EntryPoint.cs" />
     <Compile Include="Internals\ExecHelper.cs" />
     <Compile Include="Internals\OrderEntryPoint.cs" />

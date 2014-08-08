@@ -2,11 +2,14 @@
 {
     using System;
 
-    public class Gateway
+    public class TransactionGateway
     {
         private readonly ConnectionWatcher connectionWatcher;
         private readonly OrderWatcher orderWatcher;
         private readonly TradeWatcher tradeWatcher;
+
+        protected string ClassCode { get; private set; }
+        protected string SecurityCode { get; private set; }
 
         public bool IsConnected
         {
@@ -19,54 +22,60 @@
         public event EventHandler<OrderEventArgs> OrderChanged;
         public event EventHandler<TradeEventArgs> TradeChanged;
 
-        public Gateway(string pathToQuik)
+        public TransactionGateway(string pathToQuik)
         {
             this.connectionWatcher = new ConnectionWatcher(pathToQuik);
             this.orderWatcher = new OrderWatcher();
             this.tradeWatcher = new TradeWatcher();
+
             this.connectionWatcher.ConnectionStatusChanged += ConnectionStatusChanged;
             this.orderWatcher.OrderStatusChanged += OnOrderChanged;
             this.tradeWatcher.TradeStatusChanged += OnTradeChanged;
         }
 
-        public bool Subscribe(string classCode, string securityCode)
+        public bool Start(string classCode = "", string securityCode = "")
         {
-            return 
-                this.orderWatcher.Subscribe(classCode, securityCode) && 
-                this.tradeWatcher.Subscribe(classCode, securityCode);
-        }
+            this.ClassCode = classCode;
+            this.SecurityCode = securityCode;
 
-        public bool Start()
-        {
-            if (this.connectionWatcher.IsConnected)
+            if (!this.IsConnected)
             {
-                // already connected
-                return this.StartWatchers();
-            }
-            else
-            {
-                if (this.connectionWatcher.Connect())
-                {
-                    return this.StartWatchers();
-                }
-                else
+                if (!this.connectionWatcher.Connect())
                 {
                     return false;
                 }
             }
+
+            return this.Subscribe(this.ClassCode, this.SecurityCode) && this.StartWatch();
         }
 
         public void Stop()
         {
             this.orderWatcher.Unsubscribe();
             this.tradeWatcher.Unsubscribe();
+
             this.connectionWatcher.Disconnect();
+        }
+
+        private bool Subscribe(string classCode, string securityCode)
+        {
+            var ordersSubscribed = this.orderWatcher.Subscribe(classCode, securityCode);
+            var tradesSubscribed = this.tradeWatcher.Subscribe(classCode, securityCode);
+            return ordersSubscribed && tradesSubscribed;
+        }
+
+        private bool StartWatch()
+        {
+            var ordersStarted = this.orderWatcher.StartOrders();
+            var tradesStarted = this.tradeWatcher.StartTrades();
+
+            return ordersStarted && tradesStarted;
         }
 
         private void ConnectionStatusChanged(object sender, EventArgs e)
         {
             // Restart 
-            this.Start();
+            this.Start(this.ClassCode, this.SecurityCode);
         }
 
         private void OnOrderChanged(object sender, OrderEventArgs e)
@@ -87,13 +96,6 @@
             {
                 tmp(this, e);
             }
-        }
-
-        private bool StartWatchers()
-        {
-            return 
-                this.orderWatcher.StartOrders() && 
-                this.tradeWatcher.StartTrades();
         }
     }
 }

@@ -12,31 +12,25 @@
         {
             try
             {
-                var server = new Gateway(PathToQuik);
-                server.OrderChanged += OrderChanged;
-                server.TradeChanged += TradeChanged;
-
-                server.Start();
-
-                var res = server.Subscribe("", "");  // all securities 
-                Console.WriteLine("Subscribed={0}", res);
+                var gateway = new TransactionGateway(PathToQuik);
+                gateway.OrderChanged += OrderChanged;
+                gateway.TradeChanged += TradeChanged;
+                gateway.Start();
 
                 Console.WriteLine("\nPress a Esc to quit...");
 
                 DoWhileEscNotPressed(() =>
                 {
                     // check connection
-                    if (!server.IsConnected)
+                    if (!gateway.IsConnected)
                     {
-                        Console.WriteLine("Connecting to the quik...");
-                        // try to restart
-                        server.Start();
+                        Console.WriteLine("Could not connect to the quik...");
                     }
 
                     Thread.Sleep(3000); // Loop until input is entered.
                 });
 
-                server.Stop();
+                gateway.Stop();
             }
             catch (Exception ex)
             {

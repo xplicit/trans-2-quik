@@ -51,8 +51,6 @@
                 Int32 isSell,
                 Int32 tradeDescriptor)
         {
-            Console.WriteLine("TradeStatusCallback");
-
             var trade = new Trade()
             {
                 Mode = (TradeMode)mode,

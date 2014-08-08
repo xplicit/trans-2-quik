@@ -51,8 +51,6 @@
                 Int32 status,
                 Int32 orderDescriptor)
         {
-            Console.WriteLine("OrderWatcher.OrderStatusCallback called");
-
             var order = new Order()
             {
                 Balance = balance,

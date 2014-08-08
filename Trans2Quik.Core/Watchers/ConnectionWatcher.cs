@@ -23,7 +23,7 @@
         public ConnectionWatcher(string pathToQuik)
         {
             this.PathToQuik = pathToQuik;
-            this.connectionCallback = this.ConnectionStatusCallback;
+            this.connectionCallback = new EntryPoint.ConnectionStatusCallback(this.ConnectionStatusCallback);
             GCHandle.Alloc(this.connectionCallback);
         }
 
