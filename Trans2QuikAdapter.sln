@@ -1,0 +1,53 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trans2Quik.Core", "Trans2Quik.Core\Trans2Quik.Core.csproj", "{9F251A20-6A98-405C-9861-1D307F2E204A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trans2Quik.TestConsole", "Trans2Quik.TestConsole\Trans2Quik.TestConsole.csproj", "{17852CF8-BE0A-4A49-A176-BC958DD8B8BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trans2Quik.NuGetPackage", "Trans2Quik.NuGetPackage\Trans2Quik.NuGetPackage.csproj", "{21FA8618-5D09-4C8E-958E-4988D79C92CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "External", "External", "{3DCD5187-C47E-424D-A5F3-36FAA05FB3C0}"
+	ProjectSection(SolutionItems) = preProject
+		External\TRANS2QUIK.dll = External\TRANS2QUIK.dll
+		External\TRANS2QUIK.lib = External\TRANS2QUIK.lib
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{C01D55E7-7342-438D-B405-651BD6AD2D06}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Trans2Quik.Tests", "Trans2Quik.Tests\Trans2Quik.Tests.csproj", "{508CC478-B0E2-4FA5-A60E-9E025C512015}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F251A20-6A98-405C-9861-1D307F2E204A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F251A20-6A98-405C-9861-1D307F2E204A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F251A20-6A98-405C-9861-1D307F2E204A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F251A20-6A98-405C-9861-1D307F2E204A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17852CF8-BE0A-4A49-A176-BC958DD8B8BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17852CF8-BE0A-4A49-A176-BC958DD8B8BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17852CF8-BE0A-4A49-A176-BC958DD8B8BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17852CF8-BE0A-4A49-A176-BC958DD8B8BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21FA8618-5D09-4C8E-958E-4988D79C92CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21FA8618-5D09-4C8E-958E-4988D79C92CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21FA8618-5D09-4C8E-958E-4988D79C92CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21FA8618-5D09-4C8E-958E-4988D79C92CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{508CC478-B0E2-4FA5-A60E-9E025C512015}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{508CC478-B0E2-4FA5-A60E-9E025C512015}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{508CC478-B0E2-4FA5-A60E-9E025C512015}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{508CC478-B0E2-4FA5-A60E-9E025C512015}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
