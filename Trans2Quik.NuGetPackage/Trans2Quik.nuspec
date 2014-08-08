@@ -14,6 +14,7 @@
     <tags>Quik Trading</tags>
   </metadata>
   <files>
+    <file src="install.ps1" target="Tools"/>
     <file src="bin\Trans2Quik.Core.dll" target="lib\net45" />
     <file src="..\External\TRANS2QUIK.dll" target="content" />
     <file src="..\External\TRANS2QUIK.lib" target="content" />
