@@ -6,12 +6,12 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class TransactionGatewayTests
+    public class GatewayTests
     {
         [Test]
         public void CanWatchOrders()
         {
-            var tg = new TransactionGateway(Mother.CONST_PathToQuik);
+            var tg = new Gateway(Mother.CONST_PathToQuik);
             tg.OrderChanged += OrderChanged;
             tg.Start();
             

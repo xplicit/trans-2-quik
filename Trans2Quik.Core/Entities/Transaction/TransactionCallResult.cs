@@ -5,7 +5,7 @@
     public class TransactionCallResult : CallResult
     {
         public int ReplyCode { get; set; }
-        public int TransactionId { get; set; }
+        public long TransactionId { get; set; }
         public double OrderNumber { get; set; }
         public string ResultMessage { get; set; }
 
@@ -14,7 +14,7 @@
             int errorCode,
             string errorMessage,
             int replyCode,
-            int transactionId,
+            long transactionId,
             double orderNumber,
             string resultMessage)
             : base(result, errorCode, errorMessage)
@@ -29,7 +29,7 @@
         {
             var sb = new StringBuilder(base.ToString());
 
-            sb.AppendFormat(" ReplyCode={0}; TransactionId={1}; OrderNumber={2}; ResultMessage={3};",
+            sb.AppendFormat("\nReplyCode={0}; TransactionId={1}; OrderNumber={2}; ResultMessage={3};",
                 this.ReplyCode,
                 this.TransactionId,
                 this.OrderNumber,

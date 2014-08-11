@@ -8,18 +8,22 @@
     {
         public static readonly string PathToQuik = @"C:\PSBQuik";
 
+        private static long TxnNumber = 65465984;
+        private static string TxnTemplate = @"ACCOUNT=L01+00000F00; TYPE=M; TRANS_ID={0}; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION={1}; PRICE=0; QUANTITY=1;";
+
         static void Main(string[] args)
         {
             try
             {
-                var gateway = new TransactionGateway(PathToQuik);
+                var gateway = new Gateway(PathToQuik);
                 gateway.OrderChanged += OrderChanged;
                 gateway.TradeChanged += TradeChanged;
+                gateway.NewTransaction += NewTransaction;  
                 gateway.Start();
 
                 Console.WriteLine("\nPress a Esc to quit...");
 
-                DoWhileEscNotPressed(() =>
+                DoWhileEscNotPressed(gateway, () =>
                 {
                     // check connection
                     if (!gateway.IsConnected)
@@ -51,7 +55,12 @@
             Console.WriteLine("--> TRADE: {0} {1}", e.Trade, e.TradeDetails);
         }
 
-        private static void DoWhileEscNotPressed(Action action)
+        private static void NewTransaction(object sender, TransactionEventArgs e)
+        {
+            Console.WriteLine("--> NEW TRANSACTION: {0}", e.TransactionResult);
+        }
+
+        private static void DoWhileEscNotPressed(Gateway gateway, Action action)
         {
             var cki = new ConsoleKeyInfo();
             do
@@ -63,7 +72,31 @@
 
                 cki = Console.ReadKey(true);
 
+                if (cki.Key == ConsoleKey.B)
+                {
+                    Buy(gateway);
+                }
+
+                if (cki.Key == ConsoleKey.S)
+                {
+                    Sell(gateway);
+                }
+
             } while (cki.Key != ConsoleKey.Escape);
+        }
+
+        private static void Buy(Gateway gtw)
+        {
+            var txn = string.Format(TxnTemplate, TxnNumber++, "B");
+            var res = gtw.SendTransaction(txn);
+            Console.WriteLine("Send Buy transaction... Success={0}", res);
+        }
+
+        private static void Sell(Gateway gtw)
+        {
+            var txn = string.Format(TxnTemplate, TxnNumber++, "S");
+            var res = gtw.SendTransaction(txn);
+            Console.WriteLine("Send Sell transaction... Success={0}", res);
         }
     }
 }

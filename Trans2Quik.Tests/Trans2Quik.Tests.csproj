@@ -43,7 +43,8 @@
     <Compile Include="Mother.cs" />
     <Compile Include="OrderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TransactionGatewayTests.cs" />
+    <Compile Include="GatewayTests.cs" />
+    <Compile Include="TransactionWatcherTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trans2Quik.Core\Trans2Quik.Core.csproj">

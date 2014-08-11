@@ -1,6 +1,8 @@
 ﻿namespace Trans2Quik.Core
 {
-    public class OrderEventArgs
+    using System;
+
+    public class OrderEventArgs : EventArgs
     {
         public Order Order { get; private set; }
         public OrderDetails OrderDetails { get; private set; }

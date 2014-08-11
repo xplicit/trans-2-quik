@@ -1,8 +1,9 @@
 ﻿namespace Trans2Quik.Core
 {
+    using System;
     using Entities.Trade;
 
-    public class TradeEventArgs
+    public class TradeEventArgs : EventArgs
     {
         public Trade Trade { get; private set; }
         public TradeDetails TradeDetails { get; private set; }
