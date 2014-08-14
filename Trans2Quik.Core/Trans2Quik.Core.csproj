@@ -51,6 +51,7 @@
     <Compile Include="Entities\Trade\TradePeriod.cs" />
     <Compile Include="Entities\Trade\TradeTimeType.cs" />
     <Compile Include="Entities\Transaction\Transaction.cs" />
+    <Compile Include="Entities\Transaction\TransactionBuilder.cs" />
     <Compile Include="Entities\Transaction\TransactionEventArgs.cs" />
     <Compile Include="Gateway.cs" />
     <Compile Include="Internals\EntryPoint.cs" />

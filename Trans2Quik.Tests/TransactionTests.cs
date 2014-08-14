@@ -10,13 +10,13 @@
         [Test]
         public void CanCreateKillOrder()
         {
-            var ko = new Transaction(1);
+            var ko = new Transaction();
+            ko.TransactionId = 1;
             ko.Action = "KILL_ALL_ORDERS";
+            ko.ClassCode = "TQBR"; 
             ko.ClientCode = "Q6";
-            ko.ClassCode = "TQBR";
-            var ks = ko.GetTransactionString();
-            Console.WriteLine("{0}", ks);
-            Assert.IsNotEmpty(ks);
+            Console.WriteLine("{0}", ko);
+            Assert.IsNotEmpty(ko.ToString());
         }
     }
 }

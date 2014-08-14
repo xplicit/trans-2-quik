@@ -70,12 +70,12 @@
         /// </summary>
         public ExecCondition? ExecutionCondition { get; set; }
 
-        public Transaction(int transactionId)
-        {
-            this.TransactionId = transactionId;
-        }
+        /// <summary>
+        /// Номер заявки, снимаемой с тороговой системы
+        /// </summary>
+        public int? OrderKey { get; set; }
 
-        public string GetTransactionString()
+        public override string ToString()
         {
             var sb = new StringBuilder();
 
@@ -92,8 +92,9 @@
             sb.AppendOrderType("TYPE", this.IsLimitOrder);
             sb.AppendKey("MARKET_MAKER_ORDER", this.IsMarketMaker);
             sb.AppendKey("EXECUTION_CONDITION", this.ExecutionCondition);
+            sb.AppendKey("ORDER_KEY", this.OrderKey);
+
             return sb.ToString();
         }
-
     }
 }
