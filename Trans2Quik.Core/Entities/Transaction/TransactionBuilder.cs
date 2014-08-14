@@ -15,9 +15,9 @@
             this.SecCode = secCode;
         }
 
-        public Transaction NewOrder(Direction direction, decimal price, int quantity)
+        public OrderTransaction NewOrder(Direction direction, decimal price, int quantity)
         {
-            var t = new Transaction();
+            var t = new OrderTransaction();
             this.InitTransaction(t, "NEW_ORDER");
             t.Operation = direction;
             t.Price = price;
@@ -25,20 +25,20 @@
             t.IsLimitOrder = price != decimal.Zero;
             return t;
         }
-        public Transaction NewMarketOrder(Direction direction, int quantity)
+        public OrderTransaction NewMarketOrder(Direction direction, int quantity)
         {
             return this.NewOrder(direction, decimal.Zero, quantity);
         }
 
-        public Transaction KillOrder(int orderKey)
+        public OrderTransaction KillOrder(int orderKey)
         {
-            var t = new Transaction();
+            var t = new OrderTransaction();
             this.InitTransaction(t, "KILL_ORDER");
             t.OrderKey = orderKey;
             return t;
         }
 
-        private void InitTransaction(Transaction txn, string action)
+        private void InitTransaction(OrderTransaction txn, string action)
         {
             if (txn == null)
             {

@@ -10,7 +10,7 @@
         [Test]
         public void CanCreateKillOrder()
         {
-            var ko = new Transaction();
+            var ko = new OrderTransaction();
             ko.TransactionId = 1;
             ko.Action = "KILL_ALL_ORDERS";
             ko.ClassCode = "TQBR"; 

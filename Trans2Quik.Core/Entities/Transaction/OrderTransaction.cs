@@ -3,7 +3,7 @@
     using System.Text;
     using Internals;
 
-    public class Transaction
+    public class OrderTransaction
     {
         /// <summary>
         /// Уникальный идентификационный номер заявки
@@ -94,7 +94,7 @@
             sb.AppendKey("EXECUTION_CONDITION", this.ExecutionCondition);
             sb.AppendKey("ORDER_KEY", this.OrderKey);
 
-            return sb.ToString();
+            return sb.ToString().Trim();
         }
     }
 }
