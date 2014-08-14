@@ -1,5 +1,8 @@
 ﻿namespace Trans2Quik.Core
 {
+    /// <summary>
+    /// Направление заявки
+    /// </summary>
     public enum Direction : int
     {
         /// <summary>

@@ -35,6 +35,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Direction.cs" />
+    <Compile Include="Entities\ExecCondition.cs" />
     <Compile Include="Entities\Order\Order.cs" />
     <Compile Include="Entities\Order\OrderDetails.cs" />
     <Compile Include="Entities\Order\OrderEventArgs.cs" />
@@ -49,10 +50,12 @@
     <Compile Include="Entities\Trade\TradeMode.cs" />
     <Compile Include="Entities\Trade\TradePeriod.cs" />
     <Compile Include="Entities\Trade\TradeTimeType.cs" />
+    <Compile Include="Entities\Transaction\Transaction.cs" />
     <Compile Include="Entities\Transaction\TransactionEventArgs.cs" />
     <Compile Include="Gateway.cs" />
     <Compile Include="Internals\EntryPoint.cs" />
     <Compile Include="Internals\ExecHelper.cs" />
+    <Compile Include="Internals\ExtensionHelper.cs" />
     <Compile Include="Internals\OrderEntryPoint.cs" />
     <Compile Include="Internals\TradeEntryPoint.cs" />
     <Compile Include="Internals\TypeConverter.cs" />
