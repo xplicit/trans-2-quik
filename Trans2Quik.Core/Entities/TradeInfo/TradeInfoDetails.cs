@@ -1,10 +1,10 @@
-﻿namespace Trans2Quik.Core.Entities.Trade
+﻿namespace Trans2Quik.Core
 {
     using System;
     using System.Text;
     using Internals;
 
-    public class TradeDetails
+    public class TradeInfoDetails
     {
         /// <summary>
         /// Торговый счет сделки
@@ -109,7 +109,7 @@
         /// <summary>
         /// Вид сделки
         /// </summary>
-        public TradeKind Kind { get; set; }
+        public TradeInfoKind Kind { get; set; }
 
         /// <summary>
         /// Нижний предел дисконта в процентах
@@ -119,7 +119,7 @@
         /// <summary>
         /// Период, когда была совершена сделка
         /// </summary>
-        public TradePeriod Period { get; set; }
+        public TradeInfoPeriod Period { get; set; }
 
         /// <summary>
         /// Цена выкупа
@@ -224,15 +224,16 @@
             return sb.ToString().Trim();
         }
 
-        internal static TradeDetails Fetch(Int32 tradeDescriptor, TradeTimeType timeType = TradeTimeType.QuikDate)
+        internal static TradeInfoDetails Fetch(Int32 tradeDescriptor, TradeInfoTimeType timeType = TradeInfoTimeType.QuikDate)
         {
-            var td = new TradeDetails();
+            var td = new TradeInfoDetails();
 
             if (tradeDescriptor <= 0)
             {
                 return td;
             }
 
+            // TODO: use async await
             ExecHelper.Do(() => { td.Account = TradeEntryPoint.Account(tradeDescriptor); });
             ExecHelper.Do(() => { td.BrokerRef = TradeEntryPoint.BrokerRef(tradeDescriptor); });
             ExecHelper.Do(() => { td.ClientCode = TradeEntryPoint.ClientCode(tradeDescriptor); });
@@ -253,9 +254,9 @@
             ExecHelper.Do(() => { td.ExchangeComission = TradeEntryPoint.ExchangeComission(tradeDescriptor); });
             ExecHelper.Do(() => { td.FileTime = TypeConverter.GetDateTime(TradeEntryPoint.FileTime(tradeDescriptor)); });
             ExecHelper.Do(() => { td.IsMarginal = TypeConverter.GetBool(TradeEntryPoint.IsMarginal(tradeDescriptor)); });
-            ExecHelper.Do(() => { td.Kind = (TradeKind)TradeEntryPoint.Kind(tradeDescriptor); });
+            ExecHelper.Do(() => { td.Kind = (TradeInfoKind)TradeEntryPoint.Kind(tradeDescriptor); });
             ExecHelper.Do(() => { td.LowerDiscount = TradeEntryPoint.LowerDiscount(tradeDescriptor); });
-            ExecHelper.Do(() => { td.Period = (TradePeriod)TradeEntryPoint.Period(tradeDescriptor); });
+            ExecHelper.Do(() => { td.Period = (TradeInfoPeriod)TradeEntryPoint.Period(tradeDescriptor); });
             ExecHelper.Do(() => { td.Price2 = TradeEntryPoint.Price2(tradeDescriptor); });
             ExecHelper.Do(() => { td.Repo2Value = TradeEntryPoint.Repo2Value(tradeDescriptor); });
             ExecHelper.Do(() => { td.RepoRate = TradeEntryPoint.RepoRate(tradeDescriptor); });

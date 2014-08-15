@@ -1,6 +1,6 @@
-﻿namespace Trans2Quik.Core.Entities.Trade
+﻿namespace Trans2Quik.Core
 {
-    public enum TradeTimeType : int
+    public enum TradeInfoTimeType : int
     {
         /// <summary>
         /// Дата заключения сделки в формате YYYYMMDD

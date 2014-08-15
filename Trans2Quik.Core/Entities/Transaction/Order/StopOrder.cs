@@ -4,7 +4,7 @@
     using System.Text;
     using Internals;
 
-    public class StopOrderTransaction : OrderTransaction
+    public class StopOrder : Order
     {
         /// <summary>
         /// Стоп-цена за единицу инструмента
@@ -44,7 +44,7 @@
         /// <summary>
         /// Срок действия стоп-заявки
         /// </summary>
-        public string ExpiryDate { get; set; }
+        public ExpiryDate ExpiryDate { get; set; }
 
         /// <summary>
         /// Признак исполнения заявки по рыночной цене при наступлении условия "стоп-лимит"
@@ -112,6 +112,24 @@
         public bool? ActivateIfBaseOrderPartlyFilled { get; set; }
 
         
+        public StopOrder(int transactionId, string account, StopOrderKind kind) : base(transactionId, account, "NEW_STOP_ORDER")
+        {
+            this.OrderKind = kind;
+        }
+
+        internal void SetStopQuote(StopQuote stopQuote)
+        {
+            if (stopQuote == null)
+            {
+                return;
+            }
+
+            this.SetQuote(stopQuote.Quote);
+
+            this.StopPrice = stopQuote.StopPrice;
+            this.ExpiryDate = stopQuote.ExpiryDate;
+        }
+
         public override string ToString()
         {
             var sb = new StringBuilder(base.ToString());
@@ -122,7 +140,6 @@
             sb.AppendKey("STOPPRICE_SECCODE", this.StopPriceSecCode);
             sb.AppendKey("STOPPRICE_CONDITION", this.StopPriceCondition);
             sb.AppendKey("LINKED_ORDER_PRICE", this.LinkedOrderPrice);
-            sb.AppendKey("EXPIRY_DATE", this.ExpiryDate);
             sb.AppendKey("EXPIRY_DATE", this.ExpiryDate);
             sb.AppendKey("STOPPRICE2", this.StopPrice2);
             sb.AppendKey("MARKET_STOP_LIMIT", this.MarketStopLimit);

@@ -3,7 +3,7 @@
     /// <summary>
     /// Состояние исполнения заявки
     /// </summary>
-    public enum OrderStatus
+    public enum OrderInfoStatus
     {
         /// <summary>
         /// Заявка исполнена

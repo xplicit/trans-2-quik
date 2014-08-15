@@ -2,12 +2,12 @@
 {
     using System.Text;
 
-    public class Trade
+    public class TradeInfo
     {
         /// <summary>
         /// Признак того, идет ли начальное получение сделок или нет
         /// </summary>
-        public TradeMode Mode { get; set; }
+        public TradeInfoMode Mode { get; set; }
 
         /// <summary>
         /// Номер сделки

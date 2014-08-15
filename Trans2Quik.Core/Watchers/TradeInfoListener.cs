@@ -2,10 +2,9 @@
 {
     using System;
     using System.Runtime.InteropServices;
-    using Entities.Trade;
     using Internals;
 
-    internal class TradeWatcher
+    internal class TradeInfoListener
     {
         private readonly EntryPoint.TradeStatusCallback tradeStatusCallback;
 
@@ -13,9 +12,9 @@
         public string ClassCode { get; private set; }
         public string SecurityCode { get; private set; }
 
-        public event EventHandler<TradeEventArgs> TradeStatusChanged;
+        public event EventHandler<TradeInfoEventArgs> TradeStatusChanged;
 
-        public TradeWatcher()
+        public TradeInfoListener()
         {
             this.tradeStatusCallback = new EntryPoint.TradeStatusCallback(this.TradeStatusCallback);
             GCHandle.Alloc(this.tradeStatusCallback);
@@ -51,9 +50,9 @@
                 Int32 isSell,
                 Int32 tradeDescriptor)
         {
-            var trade = new Trade()
+            var trade = new TradeInfo()
             {
-                Mode = (TradeMode)mode,
+                Mode = (TradeInfoMode)mode,
                 Number = number,
                 OrderNumber = orderNumber,
                 ClassCode = classCode,
@@ -65,11 +64,11 @@
                 TradeDescriptor = tradeDescriptor
             };
 
-            var tradeDetails = TradeDetails.Fetch(trade.TradeDescriptor);
-            this.OnTradeStatusChanged(new TradeEventArgs(trade, tradeDetails));
+            var tradeDetails = TradeInfoDetails.Fetch(trade.TradeDescriptor);
+            this.OnTradeStatusChanged(new TradeInfoEventArgs(trade, tradeDetails));
         }
 
-        protected virtual void OnTradeStatusChanged(TradeEventArgs args)
+        protected virtual void OnTradeStatusChanged(TradeInfoEventArgs args)
         {
             var tmp = this.TradeStatusChanged;
 

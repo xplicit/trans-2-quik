@@ -4,7 +4,7 @@
     using System.Runtime.InteropServices;
     using Internals;
 
-    internal class OrderWatcher
+    internal class OrderInfoListener
     {
         private readonly EntryPoint.OrderStatusCallback orderStatusCallback;
 
@@ -12,9 +12,9 @@
         public string ClassCode { get; private set; }
         public string SecurityCode { get; private set; }
 
-        public event EventHandler<OrderEventArgs> OrderStatusChanged;
+        public event EventHandler<OrderInfoEventArgs> OrderStatusChanged;
 
-        public OrderWatcher()
+        public OrderInfoListener()
         {
             this.orderStatusCallback = new EntryPoint.OrderStatusCallback(this.OrderStatusCallback);
             GCHandle.Alloc(this.orderStatusCallback);
@@ -51,12 +51,12 @@
                 Int32 status,
                 Int32 orderDescriptor)
         {
-            var order = new Order()
+            var order = new OrderInfo()
             {
                 Balance = balance,
                 ClassCode = classCode,
                 Direction = TypeConverter.GetDirection(isSell),
-                Mode = (OrderMode) mode,
+                Mode = (OrderInfoMode) mode,
                 Number = number,
                 OrderDescriptor = orderDescriptor,
                 Price = price,
@@ -66,11 +66,11 @@
                 Value = value
             };
 
-            var orderDetails = OrderDetails.Fetch(order.OrderDescriptor);
-            this.OnOrderStatusChanged(new OrderEventArgs(order, orderDetails));
+            var orderDetails = OrderInfoDetails.Fetch(order.OrderDescriptor);
+            this.OnOrderStatusChanged(new OrderInfoEventArgs(order, orderDetails));
         }
 
-        protected virtual void OnOrderStatusChanged(OrderEventArgs args)
+        protected virtual void OnOrderStatusChanged(OrderInfoEventArgs args)
         {
             var tmp = this.OrderStatusChanged;
 

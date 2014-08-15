@@ -3,7 +3,7 @@
     using System.Text;
     using Internals;
 
-    public class OrderTransaction
+    public class Order
     {
         /// <summary>
         /// Уникальный идентификационный номер заявки
@@ -74,6 +74,39 @@
         /// Номер заявки, снимаемой с тороговой системы
         /// </summary>
         public string OrderKey { get; set; }
+
+        public Order(int transactionId, string account, string action)
+        {
+            this.TransactionId = transactionId;
+            this.Account = account;
+            this.Action = action;
+        }
+
+        internal void SetQuote(Quote quote)
+        {
+            if (quote == null)
+            {
+                return;
+            }
+
+            this.Operation = quote.Direction;
+            this.Price = quote.Price;
+            this.Quantity = quote.Quantity;
+            this.IsLimitOrder = !quote.IsByMarket;
+
+            this.SetSecurity(quote.Security);
+        }
+
+        internal void SetSecurity(Security security)
+        {
+            if (security == null)
+            {
+                return;
+            }
+
+            this.ClassCode = security.ClassCode;
+            this.SecCode = security.SecCode;
+        }
 
         public override string ToString()
         {

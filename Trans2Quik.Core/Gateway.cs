@@ -5,8 +5,8 @@
     public class Gateway
     {
         private readonly ConnectionWatcher connectionWatcher;
-        private readonly OrderWatcher orderWatcher;
-        private readonly TradeWatcher tradeWatcher;
+        private readonly OrderInfoListener orderInfoListener;
+        private readonly TradeInfoListener tradeInfoListener;
         private readonly TransactionWatcher transactionWatcher;
 
         protected bool TransactionsAsyncMode { get; private set; }
@@ -21,21 +21,21 @@
             }
         }
 
-        public event EventHandler<OrderEventArgs> OrderChanged;
-        public event EventHandler<TradeEventArgs> TradeChanged;
+        public event EventHandler<OrderInfoEventArgs> OrderChanged;
+        public event EventHandler<TradeInfoEventArgs> TradeChanged;
         public event EventHandler<TransactionEventArgs> NewTransaction;
 
         public Gateway(string pathToQuik, bool transactionsAsyncMode = true)
         {
             this.TransactionsAsyncMode = transactionsAsyncMode;
             this.connectionWatcher = new ConnectionWatcher(pathToQuik);
-            this.orderWatcher = new OrderWatcher();
-            this.tradeWatcher = new TradeWatcher();
+            this.orderInfoListener = new OrderInfoListener();
+            this.tradeInfoListener = new TradeInfoListener();
             this.transactionWatcher = new TransactionWatcher(this.TransactionsAsyncMode);
 
             this.connectionWatcher.ConnectionStatusChanged += ConnectionStatusChanged;
-            this.orderWatcher.OrderStatusChanged += OnOrderChanged;
-            this.tradeWatcher.TradeStatusChanged += OnTradeChanged;
+            this.orderInfoListener.OrderStatusChanged += OnOrderChanged;
+            this.tradeInfoListener.TradeStatusChanged += OnTradeChanged;
             this.transactionWatcher.TransactionAsyncReply += TransactionAsyncReply;
         }
 
@@ -57,8 +57,8 @@
 
         public void Stop()
         {
-            this.orderWatcher.Unsubscribe();
-            this.tradeWatcher.Unsubscribe();
+            this.orderInfoListener.Unsubscribe();
+            this.tradeInfoListener.Unsubscribe();
 
             this.connectionWatcher.Disconnect();
         }
@@ -77,15 +77,15 @@
 
         private bool Subscribe(string classCode, string securityCode)
         {
-            var ordersSubscribed = this.orderWatcher.Subscribe(classCode, securityCode);
-            var tradesSubscribed = this.tradeWatcher.Subscribe(classCode, securityCode);
+            var ordersSubscribed = this.orderInfoListener.Subscribe(classCode, securityCode);
+            var tradesSubscribed = this.tradeInfoListener.Subscribe(classCode, securityCode);
             return ordersSubscribed && tradesSubscribed;
         }
 
         private bool StartWatch()
         {
-            var ordersStarted = this.orderWatcher.StartOrders();
-            var tradesStarted = this.tradeWatcher.StartTrades();
+            var ordersStarted = this.orderInfoListener.StartOrders();
+            var tradesStarted = this.tradeInfoListener.StartTrades();
 
             return ordersStarted && tradesStarted;
         }
@@ -96,7 +96,7 @@
             this.Start(this.ClassCode, this.SecurityCode);
         }
 
-        private void OnOrderChanged(object sender, OrderEventArgs e)
+        private void OnOrderChanged(object sender, OrderInfoEventArgs e)
         {
             var tmp = this.OrderChanged;
 
@@ -106,7 +106,7 @@
             }
         }
 
-        private void OnTradeChanged(object sender, TradeEventArgs e)
+        private void OnTradeChanged(object sender, TradeInfoEventArgs e)
         {
             var tmp = this.TradeChanged;
 

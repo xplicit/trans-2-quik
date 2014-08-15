@@ -2,12 +2,12 @@
 {
     using System.Text;
 
-    public class Order
+    public class OrderInfo
     {
         /// <summary>
         ///  Признак того, идет ли начальное получение заявок или нет
         /// </summary>
-        public OrderMode Mode { get; set; }
+        public OrderInfoMode Mode { get; set; }
 
         /// <summary>
         ///  TransID транзакции, породившей заявку. Имеет значение «0», если заявка не была порождена транзакцией из файла, либо если TransID неизвестен
@@ -52,7 +52,7 @@
         /// <summary>
         /// Состояние исполнения заявки
         /// </summary>
-        public OrderStatus Status { get; set; }
+        public OrderInfoStatus Status { get; set; }
 
         /// <summary>
         /// Дескриптор заявки

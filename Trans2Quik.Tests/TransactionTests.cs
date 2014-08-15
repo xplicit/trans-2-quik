@@ -7,7 +7,7 @@
     [TestFixture]
     public class TransactionTests
     {
-        private static TransactionBuilder tBuilder = new TransactionBuilder(1000, "L01+00000F00", "TQBR", "SBER");
+        private static TransactionBuilder tBuilder = new TransactionBuilder(1000, "L01+00000F00");
 
         [Test]
         public void CanSendMarketOrder()
@@ -15,7 +15,7 @@
             var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionWatcher(false);
-            var txn = tBuilder.NewMarketOrder(Direction.Buy, 1);
+            var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Buy, 1));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
@@ -27,7 +27,7 @@
             var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionWatcher(false);
-            var txn = tBuilder.NewOrder(Direction.Sell, 74.85M, 1);
+            var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Sell, 1, 74.85M));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);

@@ -5,7 +5,7 @@
     using Entities.Order;
     using Internals;
 
-    public class OrderDetails
+    public class OrderInfoDetails
     {
         /// <summary>
         /// Количество заявки
@@ -70,7 +70,7 @@
         /// <summary>
         /// Период, когда была выставлена заявка
         /// </summary>
-        public OrderPeriod Period { get; set; }
+        public OrderInfoPeriod Period { get; set; }
 
         /// <summary>
         /// Дата и время выставления заявки в формате YY.MM.DD HH:MM:SS.MS
@@ -140,19 +140,20 @@
             return sb.ToString().Trim();
         }
 
-        internal static OrderDetails Fetch(Int32 orderDescriptor, OrderTimeType timeType = OrderTimeType.QuikDate)
+        internal static OrderInfoDetails Fetch(Int32 orderDescriptor, OrderInfoTimeType infoTimeType = OrderInfoTimeType.QuikDate)
         {
-            var od = new OrderDetails();
+            var od = new OrderInfoDetails();
 
             if (orderDescriptor <= 0)
             {
                 return od;
             }
 
+            // TODO: use async await
             ExecHelper.Do(() => { od.Qty = OrderEntryPoint.Qty(orderDescriptor); });
             ExecHelper.Do(() => { od.Date = OrderEntryPoint.Date(orderDescriptor); });
             ExecHelper.Do(() => { od.Time = OrderEntryPoint.Time(orderDescriptor); });
-            ExecHelper.Do(() => { od.OrderDateTime = OrderEntryPoint.DateTime(orderDescriptor, (int)timeType); });
+            ExecHelper.Do(() => { od.OrderDateTime = OrderEntryPoint.DateTime(orderDescriptor, (int)infoTimeType); });
             ExecHelper.Do(() => { od.ActivationTime = OrderEntryPoint.ActivationTime(orderDescriptor); });
             ExecHelper.Do(() => { od.WithdrawTime = OrderEntryPoint.WithdrawTime(orderDescriptor); });
             ExecHelper.Do(() => { od.Expiry = OrderEntryPoint.Expiry(orderDescriptor); });
@@ -160,7 +161,7 @@
             ExecHelper.Do(() => { od.Yield = OrderEntryPoint.Yield(orderDescriptor); });
             ExecHelper.Do(() => { od.Uid = OrderEntryPoint.Uid(orderDescriptor); });
             ExecHelper.Do(() => { od.VisibleQty = OrderEntryPoint.VisibleQty(orderDescriptor); });
-            ExecHelper.Do(() => { od.Period = (OrderPeriod)OrderEntryPoint.Period(orderDescriptor); });
+            ExecHelper.Do(() => { od.Period = (OrderInfoPeriod)OrderEntryPoint.Period(orderDescriptor); });
             ExecHelper.Do(() => { od.FileTime = TypeConverter.GetDateTime(OrderEntryPoint.FileTime(orderDescriptor)); });
             ExecHelper.Do(() => { od.WithdawFileTime = TypeConverter.GetDateTime(OrderEntryPoint.WithdawFileTime(orderDescriptor)); });
             ExecHelper.Do(() => { od.UserId = OrderEntryPoint.UserId(orderDescriptor); });

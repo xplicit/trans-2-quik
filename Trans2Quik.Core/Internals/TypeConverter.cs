@@ -8,16 +8,16 @@
     {
         public static readonly string CONST_AmountFormat = "#0.00";
 
-        public static OrderStatus GetStatus(int statusCode)
+        public static OrderInfoStatus GetStatus(int statusCode)
         {
             switch (statusCode)
             {
-                case (int)OrderStatus.Active:
-                    return OrderStatus.Active;
-                case (int)OrderStatus.Withdrawn:
-                    return OrderStatus.Withdrawn;
+                case (int)OrderInfoStatus.Active:
+                    return OrderInfoStatus.Active;
+                case (int)OrderInfoStatus.Withdrawn:
+                    return OrderInfoStatus.Withdrawn;
                 default:
-                    return OrderStatus.Completed;
+                    return OrderInfoStatus.Completed;
             }
         }
 

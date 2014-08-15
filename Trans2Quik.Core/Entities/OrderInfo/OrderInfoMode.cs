@@ -3,7 +3,7 @@
     /// <summary>
     /// Признак того, идет ли начальное получение заявок или нет
     /// </summary>
-    public enum OrderMode : int
+    public enum OrderInfoMode : int
     {
         /// <summary>
         /// Новая заявка

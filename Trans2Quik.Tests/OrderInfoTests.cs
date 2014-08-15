@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class OrderTests
+    public class OrderInfoTests
     {
         [Test]
         public void CanWatchOrders()
@@ -15,7 +15,7 @@
             Assert.IsTrue(cw.Connect());
             Console.WriteLine("Connection result:{0}", cw.LastResult);
 
-            var ow = new OrderWatcher();
+            var ow = new OrderInfoListener();
             ow.OrderStatusChanged += OrderStatusChanged;
             Assert.IsTrue(ow.Subscribe("", ""));
             Console.WriteLine("Start orders.");
@@ -27,9 +27,9 @@
             cw.Disconnect();
         }
 
-        private void OrderStatusChanged(object sender, OrderEventArgs e)
+        private void OrderStatusChanged(object sender, OrderInfoEventArgs e)
         {
-            Console.WriteLine("Order status changed: {0}\n{1}", e.Order, e.OrderDetails);
+            Console.WriteLine("Order status changed: {0}\n{1}", e.OrderInfo, e.OrderInfoDetails);
         }
     }
 }

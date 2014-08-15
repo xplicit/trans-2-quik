@@ -1,6 +1,6 @@
 ﻿namespace Trans2Quik.Core
 {
-    public enum OrderTimeType : int
+    public enum OrderInfoTimeType : int
     {
         /// <summary>
         /// Дата выставления заявки в формате YYYYMMDD

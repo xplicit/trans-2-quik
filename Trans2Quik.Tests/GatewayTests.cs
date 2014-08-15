@@ -21,9 +21,9 @@
             Console.WriteLine("Stopped");
         }
 
-        private void OrderChanged(object sender, OrderEventArgs e)
+        private void OrderChanged(object sender, OrderInfoEventArgs e)
         {
-            Console.WriteLine("Order status changed: {0}\n{1}", e.Order, e.OrderDetails);
+            Console.WriteLine("Order status changed: {0}\n{1}", e.OrderInfo, e.OrderInfoDetails);
         }
     }
 }

@@ -4,52 +4,30 @@
     {
         public int NextId { get; private set; }
         public string Account { get; private set; }
-        public string ClassCode { get; private set; }
-        public string SecCode { get; private set; }
 
-        public TransactionBuilder(int initialTransId, string account, string classCode, string secCode)
+        public TransactionBuilder(int initialTransId, string account)
         {
             this.NextId = initialTransId;
             this.Account = account;
-            this.ClassCode = classCode;
-            this.SecCode = secCode;
         }
 
-        public OrderTransaction NewOrder(Direction direction, decimal price, int quantity)
+        public Order NewOrder(Quote quote)
         {
-            var t = new OrderTransaction();
-            this.InitTransaction(t, "NEW_ORDER");
-            t.Operation = direction;
-            t.Price = price;
-            t.Quantity = quantity;
-            t.IsLimitOrder = price != decimal.Zero;
-            return t;
-        }
-        public OrderTransaction NewMarketOrder(Direction direction, int quantity)
-        {
-            return this.NewOrder(direction, decimal.Zero, quantity);
-        }
-        public OrderTransaction KillOrder(string orderKey)
-        {
-            var t = new OrderTransaction();
-            this.InitTransaction(t, "KILL_ORDER");
-            t.OrderKey = orderKey;
+            var t = new Order(this.NextId++, this.Account, "NEW_ORDER");
+            t.SetQuote(quote);
             return t;
         }
 
-
-        private void InitTransaction(OrderTransaction txn, string action)
+        public Order KillOrder(string orderKey)
         {
-            if (txn == null)
-            {
-                return;
-            }
+            return new Order(this.NextId++, this.Account, "KILL_ORDER") { OrderKey = orderKey };
+        }
 
-            txn.TransactionId = this.NextId++;
-            txn.Account = this.Account;
-            txn.ClassCode = this.ClassCode;
-            txn.SecCode = this.SecCode;
-            txn.Action = action;
+        public StopOrder NewStopOrder(StopQuote quote)
+        {
+            var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.Simple);
+            t.SetStopQuote(quote);
+            return t;
         }
     }
 }

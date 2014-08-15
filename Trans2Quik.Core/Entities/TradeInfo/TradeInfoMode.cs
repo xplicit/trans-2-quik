@@ -3,7 +3,7 @@
     /// <summary>
     /// Признак того, идет ли начальное получение сделок или нет
     /// </summary>
-    public enum TradeMode : int
+    public enum TradeInfoMode : int
     {
         /// <summary>
         /// Новая сделка

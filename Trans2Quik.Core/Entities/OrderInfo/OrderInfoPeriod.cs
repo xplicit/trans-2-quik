@@ -1,9 +1,9 @@
-﻿namespace Trans2Quik.Core
+﻿namespace Trans2Quik.Core.Entities.Order
 {
     /// <summary>
-    /// Период, когда была совершена сделка
-    /// </summary>    
-    public enum TradePeriod : int
+    /// Период, когда была выставлена заявка
+    /// </summary>
+    public enum OrderInfoPeriod : int
     {
         /// <summary>
         /// Открытие

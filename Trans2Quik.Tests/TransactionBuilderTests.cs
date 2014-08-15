@@ -12,13 +12,13 @@
         [SetUp]
         public void Setup()
         {
-            this.tb = new TransactionBuilder(1, "ABC001", "TQBR", "SBER");
+            this.tb = new TransactionBuilder(1, "ABC001");
         }
 
         [Test]
         public void CanCreateNewOrder()
         {
-            var o = this.tb.NewOrder(Direction.Buy, 73.45M, 2);
+            var o = this.tb.NewOrder(new Quote(Mother.SBRF, Direction.Buy, 2, 73.45M));
 
             Console.WriteLine(o);
             Assert.IsNotEmpty(o.ToString());
@@ -29,8 +29,7 @@
         [Test]
         public void CanCreateNewMarketOrder()
         {
-            var o = this.tb.NewMarketOrder(Direction.Sell, 2);
-
+            var o = this.tb.NewOrder(new Quote(Mother.SBRF, Direction.Sell, 2));
             Console.WriteLine(o);
             Assert.IsNotEmpty(o.ToString());
             Assert.IsFalse(o.IsLimitOrder.GetValueOrDefault());

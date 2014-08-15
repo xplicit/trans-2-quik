@@ -3,7 +3,7 @@
     /// <summary>
     /// Вид сделки
     /// </summary>
-    public enum TradeKind : int
+    public enum TradeInfoKind : int
     {
         /// <summary>
         /// Неопределен

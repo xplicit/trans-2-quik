@@ -182,5 +182,15 @@
             var symbol = isLimitOrder.Value ? "L" : "M";
             sb.AppendFormat(CONST_Format, key, symbol);
         }
+
+        public static void AppendKey(this StringBuilder sb, string key, ExpiryDate expDate)
+        {
+            if (expDate == null)
+            {
+                return;
+            }
+
+            sb.AppendFormat(CONST_Format, key, expDate);
+        }
     }
 }
