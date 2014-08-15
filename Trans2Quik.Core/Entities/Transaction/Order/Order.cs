@@ -87,30 +87,34 @@
             this.Action = action;
         }
 
-        internal void SetQuote(Quote quote)
+        internal Order SetOrderTradeParams(OrderTradeParams orderTradeParams)
         {
-            if (quote == null)
+            if (orderTradeParams == null)
             {
-                return;
+                return this;
             }
 
-            this.Operation = quote.Direction;
-            this.Price = quote.Price;
-            this.Quantity = quote.Quantity;
-            this.IsLimitOrder = !quote.IsByMarket;
+            this.Operation = orderTradeParams.Direction;
+            this.Price = orderTradeParams.Price;
+            this.Quantity = orderTradeParams.Quantity;
+            this.IsLimitOrder = orderTradeParams.IsLimited;
 
-            this.SetSecurity(quote.Security);
+            this.SetSecurity(orderTradeParams.Security);
+
+            return this;
         }
 
-        internal void SetSecurity(Security security)
+        internal Order SetSecurity(Security security)
         {
             if (security == null)
             {
-                return;
+                return this;
             }
 
             this.ClassCode = security.ClassCode;
             this.SecCode = security.SecCode;
+
+            return this;
         }
 
         public override string ToString()

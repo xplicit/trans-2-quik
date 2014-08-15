@@ -11,12 +11,21 @@
         public bool? MarketStopLimit { get; set; }
         public bool? MarketTakeProfit { get; set; }
 
-        public ProfitCondition(decimal offset, Units offsetUnits, decimal spread, Units spreadUnits)
+        public ProfitCondition(decimal offset, Units offsetUnits, decimal spread, Units spreadUnits, bool marketStopLimit = false, bool marketTakeProfit = false)
         {
             this.Offset = offset;
             this.OffsetUnits = offsetUnits;
             this.Spread = spread;
             this.SpreadUnits = spreadUnits;
+            this.MarketStopLimit = marketStopLimit;
+            this.MarketTakeProfit = marketTakeProfit;
+        }
+        public ProfitCondition(decimal offset, Units offsetUnits, bool marketStopLimit = false, bool marketTakeProfit = false)
+        {
+            this.Offset = offset;
+            this.OffsetUnits = offsetUnits;
+            this.MarketStopLimit = marketStopLimit;
+            this.MarketTakeProfit = marketTakeProfit;
         }
     }
 }

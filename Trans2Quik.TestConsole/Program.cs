@@ -8,7 +8,7 @@
     {
         private static string PathToQuik = @"Q:\PSBQuik";
         private static Security Sber = new Security("TQBR", "SBER");
-        private static TransactionBuilder TxnBuilder = new TransactionBuilder(1000, "L01+00000F00");
+        private static TransactionBuilder TxnBuilder = new TransactionBuilder("L01+00000F00");
 
         static void Main(string[] args)
         {
@@ -86,14 +86,14 @@
 
         private static void Buy(Gateway gtw)
         {
-            var txn = TxnBuilder.NewOrder(new Quote(Sber, Direction.Buy, 1));
+            var txn = TxnBuilder.NewOrder(new OrderTradeParams(Sber, Direction.Buy, 1));
             var res = gtw.SendTransaction(txn.ToString());
             Console.WriteLine("Send Buy transaction... Success={0}", res);
         }
 
         private static void Sell(Gateway gtw)
         {
-            var txn = TxnBuilder.NewOrder(new Quote(Sber, Direction.Sell, 1));
+            var txn = TxnBuilder.NewOrder(new OrderTradeParams(Sber, Direction.Sell, 1));
             var res = gtw.SendTransaction(txn.ToString());
             Console.WriteLine("Send Sell transaction... Success={0}", res);
         }

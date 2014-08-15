@@ -113,38 +113,29 @@
             this.OrderKind = kind;
         }
 
-        internal void SetTakeAndStopQuote(TakeAndStopQuote takeAndStopQuote)
+        internal StopOrder SetStopOrderTradeParams(StopOrderTradeParams stopOrderTradeParams)
         {
-            if (takeAndStopQuote == null)
+            if (stopOrderTradeParams == null)
             {
-                return;
+                return this;
             }
 
-            this.SetStopQuote(takeAndStopQuote.StopQuote);
-            this.SetActiveTime(takeAndStopQuote.ActiveTime);
-            this.StopPrice2 = takeAndStopQuote.StopPrice2;
+            this.SetOrderTradeParams(stopOrderTradeParams.OrderTradeParams);
+            this.StopPrice = stopOrderTradeParams.StopPrice;
+            this.ExpiryDate = stopOrderTradeParams.ExpiryDate;
+            this.StopPrice2 = stopOrderTradeParams.StopPrice2;
+
+            this.SetActiveTime(stopOrderTradeParams.ActiveTime);
+            this.SetProfitCondition(stopOrderTradeParams.ProfitCondition);
+
+            return this;
         }
 
-        internal void SetStopQuote(StopQuote stopQuote)
-        {
-            if (stopQuote == null)
-            {
-                return;
-            }
-
-            this.SetQuote(stopQuote.Quote);
-
-            this.StopPrice = stopQuote.StopPrice;
-            this.ExpiryDate = stopQuote.ExpiryDate;
-
-            this.SetProfitCondition(stopQuote.ProfitCondition);
-        }
-
-        internal void SetProfitCondition(ProfitCondition condition)
+        internal StopOrder SetProfitCondition(ProfitCondition condition)
         {
             if (condition == null)
             {
-                return;
+                return this;
             }
 
             this.Offset = condition.Offset;
@@ -153,18 +144,22 @@
             this.SpreadUnits = condition.SpreadUnits;
             this.MarketStopLimit = condition.MarketStopLimit;
             this.MarketTakeProfit = condition.MarketTakeProfit;
+
+            return this;
         }
 
-        internal void SetActiveTime(ActiveTime activeTime)
+        internal StopOrder SetActiveTime(ActiveTime activeTime)
         {
             if (activeTime == null)
             {
-                return;
+                return this;
             }
 
             this.IsActiveInTime = true;
             this.ActiveFromTime = activeTime.From;
             this.ActiveToTime = activeTime.To;
+
+            return this;
         }
 
         public override string ToString()
