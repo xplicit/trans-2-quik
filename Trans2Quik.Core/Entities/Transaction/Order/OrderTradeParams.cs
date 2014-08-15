@@ -1,21 +1,21 @@
 ﻿namespace Trans2Quik.Core
 {
-    public class Quote
+    public class OrderTradeParams
     {
+        public Security Security { get; private set; }
         public Direction Direction { get; private set; }
         public int Quantity { get; private set; }
         public decimal Price { get; private set; }
-        public Security Security { get; private set; }
 
-        public bool IsByMarket
+        public bool IsLimited
         {
             get
             {
-                return this.Price == decimal.Zero;
+                return this.Price != decimal.Zero;
             }
         }
 
-        public Quote(Security security, Direction direction, int quantity, decimal price = decimal.Zero)
+        public OrderTradeParams(Security security, Direction direction, int quantity, decimal price = decimal.Zero)
         {
             this.Security = security;
             this.Direction = direction;

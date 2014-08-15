@@ -2,12 +2,13 @@
 {
     using System;
     using Core;
+    using Core.Entities.Transaction.Order;
     using NUnit.Framework;
 
     [TestFixture]
     public class TransactionTests
     {
-        private static TransactionBuilder tBuilder = new TransactionBuilder(1000, "L01+00000F00");
+        private static TransactionBuilder tBuilder = new TransactionBuilder("L01+00000F00");
 
         [Test]
         public void CanSendMarketOrder()
@@ -15,7 +16,7 @@
             var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
-            var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Sell, 1));
+            var txn = tBuilder.NewOrder(new OrderTradeParams(Mother.SBRF, Direction.Sell, 1));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
@@ -27,7 +28,7 @@
             var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
-            var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Buy, 1, 74.85M));
+            var txn = tBuilder.NewOrder(new OrderTradeParams(Mother.SBRF, Direction.Buy, 1, 74.85M));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
@@ -39,8 +40,8 @@
             var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
-            var q = new Quote(Mother.SBRF, Direction.Sell, 1, 73.45m);
-            var txn = tBuilder.NewStopOrder(new StopQuote(q, 73.45m));
+            var q = new OrderTradeParams(Mother.SBRF, Direction.Sell, 1, 73.45m);
+            var txn = tBuilder.NewStopLimitOrder(new StopOrderTradeParams(q, 73.45m));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
@@ -52,8 +53,8 @@
             var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
-            var q = new Quote(Mother.SBRF, Direction.Sell, 1);
-            var sq = new StopQuote(q, 76.48m, Mother.STD_ProfitCondition);
+            var q = new OrderTradeParams(Mother.SBRF, Direction.Sell, 1);
+            var sq = new StopOrderTradeParams(q, 76.48m, Mother.STD_ProfitCondition);
             var txn = tBuilder.NewTakeProfitOrder(sq);
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
@@ -67,10 +68,9 @@
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
 
-            var q = new Quote(Mother.SBRF, Direction.Sell, 1, 76.48m);
-            var sq = new StopQuote(q, 76.48m, Mother.STD_ProfitCondition);
-            var tq = new TakeAndStopQuote(sq, 73.12m);
-            var txn = tBuilder.NewTakeProfitAndStopLimitOrder(tq);
+            var q = new OrderTradeParams(Mother.SBRF, Direction.Sell, 1, 76.48m);
+            var sq = new StopOrderTradeParams(q, 76.48m, Mother.STD_ProfitCondition, ExpiryDate.TODAY, 73.12m);
+            var txn = tBuilder.NewTakeProfitAndStopLimitOrder(sq);
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
@@ -83,16 +83,10 @@
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
 
-            var q = new Quote(Mother.SBRF, Direction.Sell, 1);
-            var pq = Mother.STD_ProfitCondition;
-
-            pq.MarketStopLimit = true;
-            pq.MarketTakeProfit = true;
-
-            var sq = new StopQuote(q, 76.48m, pq);
-            var tq = new TakeAndStopQuote(sq, 73.12m);
-            
-            var txn = tBuilder.NewTakeProfitAndStopLimitOrder(tq);
+            var q = new OrderTradeParams(Mother.SBRF, Direction.Sell, 1);
+            var pq = new ProfitCondition(0.1m, Units.PriceUnits, true, true);
+            var sq = new StopOrderTradeParams(q, 76.48m, pq, ExpiryDate.TODAY, 73.12m);
+            var txn = tBuilder.NewTakeProfitAndStopLimitOrder(sq);
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);

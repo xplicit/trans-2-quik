@@ -38,7 +38,7 @@
     <Compile Include="Entities\Transaction\Order\ExpiryDate.cs" />
     <Compile Include="Entities\Transaction\Order\ProfitCondition.cs" />
     <Compile Include="Entities\Transaction\Order\Security.cs" />
-    <Compile Include="Entities\Transaction\Quote\Quote.cs" />
+    <Compile Include="Entities\Transaction\Order\OrderTradeParams.cs" />
     <Compile Include="Entities\Direction.cs" />
     <Compile Include="Entities\Transaction\Order\ExecCondition.cs" />
     <Compile Include="Entities\OrderInfo\OrderInfo.cs" />
@@ -48,7 +48,7 @@
     <Compile Include="Entities\OrderInfo\OrderInfoPeriod.cs" />
     <Compile Include="Entities\OrderInfo\OrderInfoStatus.cs" />
     <Compile Include="Entities\OrderInfo\OrderInfoTimeType.cs" />
-    <Compile Include="Entities\Transaction\Quote\StopQuote.cs" />
+    <Compile Include="Entities\Transaction\Order\StopOrderTradeParams.cs" />
     <Compile Include="Entities\Transaction\Order\StopOrderKind.cs" />
     <Compile Include="Entities\Transaction\Order\StopPriceCondition.cs" />
     <Compile Include="Entities\TradeInfo\TradeInfo.cs" />
@@ -61,7 +61,6 @@
     <Compile Include="Entities\Transaction\Order\Order.cs" />
     <Compile Include="Entities\Transaction\Order\StopOrder.cs" />
     <Compile Include="Components\TransactionBuilder.cs" />
-    <Compile Include="Entities\Transaction\Quote\TakeAndStopQuote.cs" />
     <Compile Include="Entities\Transaction\TransactionEventArgs.cs" />
     <Compile Include="Entities\Transaction\Order\Units.cs" />
     <Compile Include="Gateway.cs" />

@@ -2,55 +2,48 @@
 {
     public class TransactionBuilder
     {
-        public int NextId { get; private set; }
+        public int NextTxnId { get; private set; }
         public string Account { get; private set; }
 
-        public TransactionBuilder(int initialTransId, string account)
+        private int GetNextId()
         {
-            this.NextId = initialTransId;
+            return this.NextTxnId++;
+        }
+
+        public TransactionBuilder(string account, int initialTransId = 1)
+        {
             this.Account = account;
+            this.NextTxnId = initialTransId;
         }
 
-        public Order NewOrder(Quote quote)
+        public Order NewOrder(OrderTradeParams tradeParams)
         {
-            var t = new Order(this.NextId++, this.Account, "NEW_ORDER");
-            t.SetQuote(quote);
-            return t;
+            return new Order(this.GetNextId(), this.Account, "NEW_ORDER").SetOrderTradeParams(tradeParams);
         }
 
-        public StopOrder NewStopOrder(StopQuote quote)
+        public StopOrder NewStopLimitOrder(StopOrderTradeParams tradeParams)
         {
-            var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.Simple);
-            t.SetStopQuote(quote);
-            return t;
+            return new StopOrder(this.GetNextId(), this.Account, StopOrderKind.Simple).SetStopOrderTradeParams(tradeParams);
         }
 
-        public StopOrder NewTakeProfitOrder(StopQuote quote)
+        public StopOrder NewTakeProfitOrder(StopOrderTradeParams tradeParams)
         {
-            var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.TakeProfit);
-            t.SetStopQuote(quote);
-            return t;
+            return new StopOrder(this.GetNextId(), this.Account, StopOrderKind.TakeProfit).SetStopOrderTradeParams(tradeParams);
         }
 
-        public StopOrder NewTakeProfitAndStopLimitOrder(TakeAndStopQuote quote)
+        public StopOrder NewTakeProfitAndStopLimitOrder(StopOrderTradeParams tradeParams)
         {
-            var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.TakeProfitAndStopLimit);
-            t.SetTakeAndStopQuote(quote);
-            return t;
+            return new StopOrder(this.GetNextId(), this.Account, StopOrderKind.TakeProfitAndStopLimit).SetStopOrderTradeParams(tradeParams);
         }
 
         public Order KillOrder(Security security, string orderKey)
         {
-            var t = new Order(this.NextId++, this.Account, "KILL_ORDER") { OrderKey = orderKey };
-            t.SetSecurity(security);
-            return t;
+            return (new Order(this.GetNextId(), this.Account, "KILL_ORDER") { OrderKey = orderKey }).SetSecurity(security);
         }
 
         public Order KillStopOrder(Security security, string orderKey)
         {
-            var t = new Order(this.NextId++, this.Account, "KILL_STOP_ORDER") { StopOrderKey = orderKey };
-            t.SetSecurity(security);
-            return t;
+            return (new Order(this.GetNextId(), this.Account, "KILL_STOP_ORDER") { StopOrderKey = orderKey }).SetSecurity(security);
         }
     }
 }
