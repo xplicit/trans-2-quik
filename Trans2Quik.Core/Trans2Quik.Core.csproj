@@ -44,6 +44,7 @@
     <Compile Include="Entities\Order\OrderStatus.cs" />
     <Compile Include="Entities\Order\OrderTimeType.cs" />
     <Compile Include="Entities\StopOrderKind.cs" />
+    <Compile Include="Entities\StopPriceCondition.cs" />
     <Compile Include="Entities\Trade\Trade.cs" />
     <Compile Include="Entities\Trade\TradeDetails.cs" />
     <Compile Include="Entities\Trade\TradeEventArgs.cs" />

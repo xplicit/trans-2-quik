@@ -2,6 +2,7 @@
 {
     using System;
     using System.Text;
+    using Internals;
 
     public class StopOrderTransaction : OrderTransaction
     {
@@ -28,7 +29,7 @@
         /// <summary>
         /// Направление предельного изменения стоп-цены
         /// </summary>
-        public string StopPriceCondition { get; set; }
+        public StopPriceCondition? StopPriceCondition { get; set; }
 
         /// <summary>
         /// Цена связанной лимитированной заявки
@@ -114,8 +115,31 @@
         public override string ToString()
         {
             var sb = new StringBuilder(base.ToString());
+
+            sb.AppendKey("STOPPRICE", this.StopPrice);
+            sb.AppendKey("STOP_ORDER_KIND", this.OrderKind);
+            sb.AppendKey("STOPPRICE_CLASSCODE", this.StopPriceClassCode);
+            sb.AppendKey("STOPPRICE_SECCODE", this.StopPriceSecCode);
+            sb.AppendKey("STOPPRICE_CONDITION", this.StopPriceCondition);
+            sb.AppendKey("LINKED_ORDER_PRICE", this.LinkedOrderPrice);
+            sb.AppendKey("EXPIRY_DATE", this.ExpiryDate);
+            sb.AppendKey("EXPIRY_DATE", this.ExpiryDate);
+            sb.AppendKey("STOPPRICE2", this.StopPrice2);
+            sb.AppendKey("MARKET_STOP_LIMIT", this.MarketStopLimit);
+            sb.AppendKey("MARKET_TAKE_PROFIT", this.MarketTakeProfit);
+            sb.AppendKey("IS_ACTIVE_IN_TIME", this.IsActiveInTime);
+            sb.AppendKey("ACTIVE_FROM_TIME", this.ActiveFromTime);
+            sb.AppendKey("ACTIVE_TO_TIME", this.ActiveToTime);
+            sb.AppendKey("STOP_ORDER_KEY", this.StopOrderKey);
+            sb.AppendKey("OFFSET", this.Offset);
+            sb.AppendKey("OFFSET_UNITS", this.OffsetUnits);
+            sb.AppendKey("SPREAD", this.Spread);
+            sb.AppendKey("SPREAD_UNITS", this.SpreadUnits);
+            sb.AppendKey("BASE_ORDER_KEY", this.BaseOrderKey);
+            sb.AppendKey("USE_BASE_ORDER_BALANCE", this.UseBaseOrderBalance);
+            sb.AppendKey("ACTIVATE_IF_BASE_ORDER_PARTLY_FILLED", this.ActivateIfBaseOrderPartlyFilled);
+
             return sb.ToString().Trim();
         }
     }
-
 }
