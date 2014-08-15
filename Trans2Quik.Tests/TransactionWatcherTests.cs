@@ -11,10 +11,10 @@
         [Test]
         public void CanSendEmptySyncTransaction()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
 
-            var tw = new TransactionWatcher(false);
+            var tw = new TransactionManager(false);
             var txn = string.Empty;
             var res = tw.SendSyncTransaction(txn);
             Console.WriteLine("{0}", res);
@@ -24,10 +24,10 @@
         [Test]
         public void CanSendGoodSyncTransaction()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
 
-            var tw = new TransactionWatcher(false);
+            var tw = new TransactionManager(false);
             var txn = "ACCOUNT=L01+00000F00; TYPE=M; TRANS_ID=6546546; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION=B; PRICE=0; QUANTITY=1;";
             var res = tw.SendSyncTransaction(txn);
             Console.WriteLine("{0}", res);
@@ -37,10 +37,10 @@
         [Test]
         public void CanSendGoodAsyncTransaction()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
 
-            var tw = new TransactionWatcher();
+            var tw = new TransactionManager();
             tw.TransactionAsyncReply += TransactionAsyncReply;
             var txn = "ACCOUNT=L01+00000F00; TYPE=M; TRANS_ID=6546547; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION=S; PRICE=0; QUANTITY=1;";
             var res = tw.SendAsyncTransaction(txn);

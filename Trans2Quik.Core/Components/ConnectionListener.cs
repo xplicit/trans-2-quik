@@ -4,7 +4,7 @@
     using System.Runtime.InteropServices;
     using Internals;
 
-    internal class ConnectionWatcher
+    internal class ConnectionListener
     {
         private readonly EntryPoint.ConnectionStatusCallback connectionCallback;
 
@@ -20,7 +20,7 @@
 
         public event EventHandler ConnectionStatusChanged;
 
-        public ConnectionWatcher(string pathToQuik)
+        public ConnectionListener(string pathToQuik)
         {
             this.PathToQuik = pathToQuik;
             this.connectionCallback = new EntryPoint.ConnectionStatusCallback(this.ConnectionStatusCallback);

@@ -12,9 +12,9 @@
         [Test]
         public void CanSendMarketOrder()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
-            var tw = new TransactionWatcher(false);
+            var tw = new TransactionManager(false);
             var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Buy, 1));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
@@ -24,9 +24,9 @@
         [Test]
         public void CanSendLimitOrder()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
-            var tw = new TransactionWatcher(false);
+            var tw = new TransactionManager(false);
             var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Sell, 1, 74.85M));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
@@ -36,9 +36,9 @@
         [Test]
         public void CanKillOrder()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
-            var tw = new TransactionWatcher(false);
+            var tw = new TransactionManager(false);
             var txn = tBuilder.KillOrder("11761165138");
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);

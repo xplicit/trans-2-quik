@@ -4,7 +4,7 @@
     using System.Runtime.InteropServices;
     using Internals;
 
-    public class TransactionWatcher
+    public class TransactionManager
     {
         private readonly EntryPoint.TransactionReplyCallback transactionReplyCallback;
 
@@ -13,7 +13,7 @@
 
         public event EventHandler<TransactionEventArgs> TransactionAsyncReply;
 
-        public TransactionWatcher(bool asyncMode = true)
+        public TransactionManager(bool asyncMode = true)
         {
             this.AsyncMode = asyncMode;
 

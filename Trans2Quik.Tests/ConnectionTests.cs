@@ -10,7 +10,7 @@
         [Test]
         public void CanConnect()
         {
-            var cw = new ConnectionWatcher(Mother.CONST_PathToQuik);
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
 
             Console.WriteLine("Connection result:{0}", cw.LastResult);

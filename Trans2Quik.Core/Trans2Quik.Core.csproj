@@ -77,10 +77,10 @@
     <Compile Include="ReturnValues\CallResult.cs" />
     <Compile Include="ReturnValues\ReturnValue.cs" />
     <Compile Include="Entities\Transaction\TransactionCallResult.cs" />
-    <Compile Include="Watchers\ConnectionWatcher.cs" />
-    <Compile Include="Watchers\OrderInfoListener.cs" />
-    <Compile Include="Watchers\TradeInfoListener.cs" />
-    <Compile Include="Watchers\TransactionWatcher.cs" />
+    <Compile Include="Components\ConnectionListener.cs" />
+    <Compile Include="Components\OrderInfoListener.cs" />
+    <Compile Include="Components\TradeInfoListener.cs" />
+    <Compile Include="Components\TransactionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">

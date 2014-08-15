@@ -4,10 +4,10 @@
 
     public class Gateway
     {
-        private readonly ConnectionWatcher connectionWatcher;
+        private readonly ConnectionListener connectionListener;
         private readonly OrderInfoListener orderInfoListener;
         private readonly TradeInfoListener tradeInfoListener;
-        private readonly TransactionWatcher transactionWatcher;
+        private readonly TransactionManager transactionManager;
 
         protected bool TransactionsAsyncMode { get; private set; }
         protected string ClassCode { get; private set; }
@@ -17,7 +17,7 @@
         {
             get
             {
-                return this.connectionWatcher.IsConnected;
+                return this.connectionListener.IsConnected;
             }
         }
 
@@ -28,15 +28,15 @@
         public Gateway(string pathToQuik, bool transactionsAsyncMode = true)
         {
             this.TransactionsAsyncMode = transactionsAsyncMode;
-            this.connectionWatcher = new ConnectionWatcher(pathToQuik);
+            this.connectionListener = new ConnectionListener(pathToQuik);
             this.orderInfoListener = new OrderInfoListener();
             this.tradeInfoListener = new TradeInfoListener();
-            this.transactionWatcher = new TransactionWatcher(this.TransactionsAsyncMode);
+            this.transactionManager = new TransactionManager(this.TransactionsAsyncMode);
 
-            this.connectionWatcher.ConnectionStatusChanged += ConnectionStatusChanged;
+            this.connectionListener.ConnectionStatusChanged += ConnectionStatusChanged;
             this.orderInfoListener.OrderStatusChanged += OnOrderChanged;
             this.tradeInfoListener.TradeStatusChanged += OnTradeChanged;
-            this.transactionWatcher.TransactionAsyncReply += TransactionAsyncReply;
+            this.transactionManager.TransactionAsyncReply += TransactionAsyncReply;
         }
 
         public bool Start(string classCode = "", string securityCode = "")
@@ -46,7 +46,7 @@
 
             if (!this.IsConnected)
             {
-                if (!this.connectionWatcher.Connect())
+                if (!this.connectionListener.Connect())
                 {
                     return false;
                 }
@@ -60,17 +60,17 @@
             this.orderInfoListener.Unsubscribe();
             this.tradeInfoListener.Unsubscribe();
 
-            this.connectionWatcher.Disconnect();
+            this.connectionListener.Disconnect();
         }
 
         public bool SendTransaction(string transactionString)
         {
             if (this.TransactionsAsyncMode)
             {
-                return this.transactionWatcher.SendAsyncTransaction(transactionString);
+                return this.transactionManager.SendAsyncTransaction(transactionString);
             }
 
-            var res = this.transactionWatcher.SendSyncTransaction(transactionString);
+            var res = this.transactionManager.SendSyncTransaction(transactionString);
             this.TransactionAsyncReply(this, new TransactionEventArgs(res));
             return res.ReturnValue.IsSuccess;
         }
