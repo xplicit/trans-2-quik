@@ -29,14 +29,14 @@
         {
             return this.NewOrder(direction, decimal.Zero, quantity);
         }
-
-        public OrderTransaction KillOrder(int orderKey)
+        public OrderTransaction KillOrder(string orderKey)
         {
             var t = new OrderTransaction();
             this.InitTransaction(t, "KILL_ORDER");
             t.OrderKey = orderKey;
             return t;
         }
+
 
         private void InitTransaction(OrderTransaction txn, string action)
         {

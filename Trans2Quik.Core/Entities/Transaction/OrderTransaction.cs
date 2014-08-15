@@ -73,7 +73,7 @@
         /// <summary>
         /// Номер заявки, снимаемой с тороговой системы
         /// </summary>
-        public int? OrderKey { get; set; }
+        public string OrderKey { get; set; }
 
         public override string ToString()
         {

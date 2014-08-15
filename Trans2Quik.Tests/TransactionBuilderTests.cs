@@ -40,11 +40,11 @@
         [Test]
         public void CanCreateKillOrder()
         {
-            var o = this.tb.KillOrder(2);
+            var o = this.tb.KillOrder("2");
 
             Console.WriteLine(o);
             Assert.IsNotEmpty(o.ToString());
-            Assert.IsTrue(o.OrderKey== 2);
+            Assert.IsTrue(o.OrderKey == "2");
         }
     }
 }

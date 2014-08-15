@@ -74,7 +74,7 @@
         /// <summary>
         /// Номер стоп-заявки, снимаемой с торговой системы
         /// </summary>
-        public int? StopOrderKey { get; set; }
+        public string StopOrderKey { get; set; }
 
         /// <summary>
         /// Величина отступа от максимума (минимума) цены последней сделки.
@@ -99,7 +99,7 @@
         /// <summary>
         /// Регистрационный номер заявки-условия
         /// </summary>
-        public int? BaseOrderKey { get; set; }
+        public string BaseOrderKey { get; set; }
 
         /// <summary>
         /// Признак использования в качестве объема заявки "по исполнению" исполненного количества бумаг заявки-условия.
