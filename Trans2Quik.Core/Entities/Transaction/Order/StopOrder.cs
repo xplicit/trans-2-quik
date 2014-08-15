@@ -2,6 +2,7 @@
 {
     using System;
     using System.Text;
+    using Entities.Transaction.Order;
     using Internals;
 
     public class StopOrder : Order
@@ -112,6 +113,18 @@
             this.OrderKind = kind;
         }
 
+        internal void SetTakeAndStopQuote(TakeAndStopQuote takeAndStopQuote)
+        {
+            if (takeAndStopQuote == null)
+            {
+                return;
+            }
+
+            this.SetStopQuote(takeAndStopQuote.StopQuote);
+            this.SetActiveTime(takeAndStopQuote.ActiveTime);
+            this.StopPrice2 = takeAndStopQuote.StopPrice2;
+        }
+
         internal void SetStopQuote(StopQuote stopQuote)
         {
             if (stopQuote == null)
@@ -123,6 +136,35 @@
 
             this.StopPrice = stopQuote.StopPrice;
             this.ExpiryDate = stopQuote.ExpiryDate;
+
+            this.SetProfitCondition(stopQuote.ProfitCondition);
+        }
+
+        internal void SetProfitCondition(ProfitCondition condition)
+        {
+            if (condition == null)
+            {
+                return;
+            }
+
+            this.Offset = condition.Offset;
+            this.OffsetUnits = condition.OffsetUnits;
+            this.Spread = condition.Spread;
+            this.SpreadUnits = condition.SpreadUnits;
+            this.MarketStopLimit = condition.MarketStopLimit;
+            this.MarketTakeProfit = condition.MarketTakeProfit;
+        }
+
+        internal void SetActiveTime(ActiveTime activeTime)
+        {
+            if (activeTime == null)
+            {
+                return;
+            }
+
+            this.IsActiveInTime = true;
+            this.ActiveFromTime = activeTime.From;
+            this.ActiveToTime = activeTime.To;
         }
 
         public override string ToString()

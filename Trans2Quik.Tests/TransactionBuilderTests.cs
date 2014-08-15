@@ -46,6 +46,27 @@
         }
 
         [Test]
+        public void CanCreateTakeProfitOrder()
+        {
+            var q = new Quote(Mother.SBRF, Direction.Sell, 1);
+            var sq = new StopQuote(q, 76.48m, Mother.STD_ProfitCondition);
+            var o = this.tb.NewTakeProfitOrder(sq);
+            Console.WriteLine(o);
+            Assert.IsNotEmpty(o.ToString());
+        }
+
+        [Test]
+        public void CanCreateTakeProfitAndStopLimitOrder()
+        {
+            var q = new Quote(Mother.SBRF, Direction.Sell, 1, 76.48m);
+            var sq = new StopQuote(q, 76.48m, Mother.STD_ProfitCondition);
+            var tq = new TakeAndStopQuote(sq, 73.12m);
+            var o = this.tb.NewTakeProfitAndStopLimitOrder(tq);
+            Console.WriteLine(o);
+            Assert.IsNotEmpty(o.ToString());
+        }
+
+        [Test]
         public void CanCreateKillOrder()
         {
             var o = this.tb.KillOrder(Mother.SBRF, "2");

@@ -34,7 +34,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Transaction\Order\ActiveTime.cs" />
     <Compile Include="Entities\Transaction\Order\ExpiryDate.cs" />
+    <Compile Include="Entities\Transaction\Order\ProfitCondition.cs" />
     <Compile Include="Entities\Transaction\Order\Security.cs" />
     <Compile Include="Entities\Transaction\Quote\Quote.cs" />
     <Compile Include="Entities\Direction.cs" />
@@ -58,7 +60,8 @@
     <Compile Include="Entities\TradeInfo\TradeInfoTimeType.cs" />
     <Compile Include="Entities\Transaction\Order\Order.cs" />
     <Compile Include="Entities\Transaction\Order\StopOrder.cs" />
-    <Compile Include="Entities\Transaction\TransactionBuilder.cs" />
+    <Compile Include="Components\TransactionBuilder.cs" />
+    <Compile Include="Entities\Transaction\Quote\TakeAndStopQuote.cs" />
     <Compile Include="Entities\Transaction\TransactionEventArgs.cs" />
     <Compile Include="Entities\Transaction\Order\Units.cs" />
     <Compile Include="Gateway.cs" />

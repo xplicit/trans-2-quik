@@ -25,6 +25,20 @@
             return t;
         }
 
+        public StopOrder NewTakeProfitOrder(StopQuote quote)
+        {
+            var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.TakeProfit);
+            t.SetStopQuote(quote);
+            return t;
+        }
+
+        public StopOrder NewTakeProfitAndStopLimitOrder(TakeAndStopQuote quote)
+        {
+            var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.TakeProfitAndStopLimit);
+            t.SetTakeAndStopQuote(quote);
+            return t;
+        }
+
         public Order KillOrder(Security security, string orderKey)
         {
             var t = new Order(this.NextId++, this.Account, "KILL_ORDER") { OrderKey = orderKey };

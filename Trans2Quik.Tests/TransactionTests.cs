@@ -47,6 +47,58 @@
         }
 
         [Test]
+        public void CanSendTakeProfitOrder()
+        {
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
+            Assert.IsTrue(cw.Connect());
+            var tw = new TransactionManager(false);
+            var q = new Quote(Mother.SBRF, Direction.Sell, 1);
+            var sq = new StopQuote(q, 76.48m, Mother.STD_ProfitCondition);
+            var txn = tBuilder.NewTakeProfitOrder(sq);
+            var res = tw.SendSyncTransaction(txn.ToString());
+            Console.WriteLine("{0}", res);
+            Assert.IsTrue(res.ReturnValue.IsSuccess);
+        }
+
+        [Test]
+        public void CanSendTakeProfitAndStopLimitOrder()
+        {
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
+            Assert.IsTrue(cw.Connect());
+            var tw = new TransactionManager(false);
+
+            var q = new Quote(Mother.SBRF, Direction.Sell, 1, 76.48m);
+            var sq = new StopQuote(q, 76.48m, Mother.STD_ProfitCondition);
+            var tq = new TakeAndStopQuote(sq, 73.12m);
+            var txn = tBuilder.NewTakeProfitAndStopLimitOrder(tq);
+            var res = tw.SendSyncTransaction(txn.ToString());
+            Console.WriteLine("{0}", res);
+            Assert.IsTrue(res.ReturnValue.IsSuccess);
+        }
+
+        [Test]
+        public void CanSendTakeProfitAndStopLimitMarketOrder()
+        {
+            var cw = new ConnectionListener(Mother.CONST_PathToQuik);
+            Assert.IsTrue(cw.Connect());
+            var tw = new TransactionManager(false);
+
+            var q = new Quote(Mother.SBRF, Direction.Sell, 1);
+            var pq = Mother.STD_ProfitCondition;
+
+            pq.MarketStopLimit = true;
+            pq.MarketTakeProfit = true;
+
+            var sq = new StopQuote(q, 76.48m, pq);
+            var tq = new TakeAndStopQuote(sq, 73.12m);
+            
+            var txn = tBuilder.NewTakeProfitAndStopLimitOrder(tq);
+            var res = tw.SendSyncTransaction(txn.ToString());
+            Console.WriteLine("{0}", res);
+            Assert.IsTrue(res.ReturnValue.IsSuccess);
+        }
+
+        [Test]
         public void CanKillOrder()
         {
             var cw = new ConnectionListener(Mother.CONST_PathToQuik);
