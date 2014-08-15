@@ -6,10 +6,9 @@
 
     class Program
     {
-        public static readonly string PathToQuik = @"C:\PSBQuik";
-
-        private static long TxnNumber = 65465984;
-        private static string TxnTemplate = @"ACCOUNT=L01+00000F00; TYPE=M; TRANS_ID={0}; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION={1}; PRICE=0; QUANTITY=1;";
+        private static string PathToQuik = @"Q:\PSBQuik";
+        private static Security Sber = new Security("TQBR", "SBER");
+        private static TransactionBuilder TxnBuilder = new TransactionBuilder(1000, "L01+00000F00");
 
         static void Main(string[] args)
         {
@@ -43,16 +42,16 @@
             }
         }
 
-        private static void OrderChanged(object sender, OrderEventArgs e)
+        private static void OrderChanged(object sender, OrderInfoEventArgs e)
         {
             // Process order here
-            Console.WriteLine("--> ORDER: {0} {1}", e.Order, e.OrderDetails);
+            Console.WriteLine("--> ORDER: {0} {1}", e.OrderInfo, e.OrderInfoDetails);
         }
 
-        private static void TradeChanged(object sender, TradeEventArgs e)
+        private static void TradeChanged(object sender, TradeInfoEventArgs e)
         {
             // Process trade here
-            Console.WriteLine("--> TRADE: {0} {1}", e.Trade, e.TradeDetails);
+            Console.WriteLine("--> TRADE: {0} {1}", e.TradeInfo, e.TradeInfoDetails);
         }
 
         private static void NewTransaction(object sender, TransactionEventArgs e)
@@ -87,15 +86,15 @@
 
         private static void Buy(Gateway gtw)
         {
-            var txn = string.Format(TxnTemplate, TxnNumber++, "B");
-            var res = gtw.SendTransaction(txn);
+            var txn = TxnBuilder.NewOrder(new Quote(Sber, Direction.Buy, 1));
+            var res = gtw.SendTransaction(txn.ToString());
             Console.WriteLine("Send Buy transaction... Success={0}", res);
         }
 
         private static void Sell(Gateway gtw)
         {
-            var txn = string.Format(TxnTemplate, TxnNumber++, "S");
-            var res = gtw.SendTransaction(txn);
+            var txn = TxnBuilder.NewOrder(new Quote(Sber, Direction.Sell, 1));
+            var res = gtw.SendTransaction(txn.ToString());
             Console.WriteLine("Send Sell transaction... Success={0}", res);
         }
     }

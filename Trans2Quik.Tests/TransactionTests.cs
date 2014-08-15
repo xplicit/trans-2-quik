@@ -15,7 +15,7 @@
             var cw = new ConnectionListener(Mother.CONST_PathToQuik);
             Assert.IsTrue(cw.Connect());
             var tw = new TransactionManager(false);
-            var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Buy, 1));
+            var txn = tBuilder.NewOrder(new Quote(Mother.SBRF, Direction.Sell, 1));
             var res = tw.SendSyncTransaction(txn.ToString());
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
