@@ -72,11 +72,6 @@
         public DateTime? ActiveToTime { get; set; }
 
         /// <summary>
-        /// Номер стоп-заявки, снимаемой с торговой системы
-        /// </summary>
-        public string StopOrderKey { get; set; }
-
-        /// <summary>
         /// Величина отступа от максимума (минимума) цены последней сделки.
         /// </summary>
         public decimal? Offset { get; set; }
@@ -132,7 +127,7 @@
 
         public override string ToString()
         {
-            var sb = new StringBuilder(base.ToString());
+            var sb = new StringBuilder(base.ToString() + " ");
 
             sb.AppendKey("STOPPRICE", this.StopPrice);
             sb.AppendKey("STOP_ORDER_KIND", this.OrderKind);
@@ -147,7 +142,6 @@
             sb.AppendKey("IS_ACTIVE_IN_TIME", this.IsActiveInTime);
             sb.AppendKey("ACTIVE_FROM_TIME", this.ActiveFromTime);
             sb.AppendKey("ACTIVE_TO_TIME", this.ActiveToTime);
-            sb.AppendKey("STOP_ORDER_KEY", this.StopOrderKey);
             sb.AppendKey("OFFSET", this.Offset);
             sb.AppendKey("OFFSET_UNITS", this.OffsetUnits);
             sb.AppendKey("SPREAD", this.Spread);

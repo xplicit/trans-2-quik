@@ -75,6 +75,11 @@
         /// </summary>
         public string OrderKey { get; set; }
 
+        /// <summary>
+        /// Номер стоп-заявки, снимаемой с торговой системы
+        /// </summary>
+        public string StopOrderKey { get; set; }
+
         public Order(int transactionId, string account, string action)
         {
             this.TransactionId = transactionId;
@@ -126,6 +131,7 @@
             sb.AppendKey("MARKET_MAKER_ORDER", this.IsMarketMaker);
             sb.AppendKey("EXECUTION_CONDITION", this.ExecutionCondition);
             sb.AppendKey("ORDER_KEY", this.OrderKey);
+            sb.AppendKey("STOP_ORDER_KEY", this.StopOrderKey);
 
             return sb.ToString().Trim();
         }

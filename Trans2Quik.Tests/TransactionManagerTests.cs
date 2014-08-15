@@ -6,7 +6,7 @@
     using NUnit.Framework;
 
     [TestFixture]
-    public class TransactionWatcherTests
+    public class TransactionManagerTests
     {
         [Test]
         public void CanSendEmptySyncTransaction()

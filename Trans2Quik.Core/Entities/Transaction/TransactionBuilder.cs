@@ -18,15 +18,24 @@
             return t;
         }
 
-        public Order KillOrder(string orderKey)
-        {
-            return new Order(this.NextId++, this.Account, "KILL_ORDER") { OrderKey = orderKey };
-        }
-
         public StopOrder NewStopOrder(StopQuote quote)
         {
             var t = new StopOrder(this.NextId++, this.Account, StopOrderKind.Simple);
             t.SetStopQuote(quote);
+            return t;
+        }
+
+        public Order KillOrder(Security security, string orderKey)
+        {
+            var t = new Order(this.NextId++, this.Account, "KILL_ORDER") { OrderKey = orderKey };
+            t.SetSecurity(security);
+            return t;
+        }
+
+        public Order KillStopOrder(Security security, string orderKey)
+        {
+            var t = new Order(this.NextId++, this.Account, "KILL_STOP_ORDER") { StopOrderKey = orderKey };
+            t.SetSecurity(security);
             return t;
         }
     }

@@ -37,13 +37,30 @@
         }
 
         [Test]
+        public void CanCreateStopOrder()
+        {
+            var q = new Quote(Mother.SBRF, Direction.Sell, 1);
+            var o = this.tb.NewStopOrder(new StopQuote(q, 73.48m));
+            Console.WriteLine(o);
+            Assert.IsNotEmpty(o.ToString());
+        }
+
+        [Test]
         public void CanCreateKillOrder()
         {
-            var o = this.tb.KillOrder("2");
-
+            var o = this.tb.KillOrder(Mother.SBRF, "2");
             Console.WriteLine(o);
             Assert.IsNotEmpty(o.ToString());
             Assert.IsTrue(o.OrderKey == "2");
+        }
+
+        [Test]
+        public void CanCreateKillStopOrder()
+        {
+            var o = this.tb.KillStopOrder(Mother.SBRF, "22");
+            Console.WriteLine(o);
+            Assert.IsNotEmpty(o.ToString());
+            Assert.IsTrue(o.StopOrderKey == "22");
         }
     }
 }

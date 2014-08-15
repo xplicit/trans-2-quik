@@ -47,7 +47,7 @@
     <Compile Include="GatewayTests.cs" />
     <Compile Include="TransactionBuilderTests.cs" />
     <Compile Include="TransactionTests.cs" />
-    <Compile Include="TransactionWatcherTests.cs" />
+    <Compile Include="TransactionManagerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Trans2Quik.Core\Trans2Quik.Core.csproj">
