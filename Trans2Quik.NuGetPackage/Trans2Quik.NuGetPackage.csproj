@@ -37,6 +37,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="BuildPackage.cmd" />
+    <None Include="install.ps1" />
     <None Include="Trans2Quik.nuspec">
       <SubType>Designer</SubType>
     </None>

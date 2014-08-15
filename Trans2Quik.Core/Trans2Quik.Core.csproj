@@ -34,24 +34,40 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Transaction\Order\ActiveTime.cs" />
+    <Compile Include="Entities\Transaction\Order\ExpiryDate.cs" />
+    <Compile Include="Entities\Transaction\Order\ProfitCondition.cs" />
+    <Compile Include="Entities\Transaction\Order\Security.cs" />
+    <Compile Include="Entities\Transaction\Quote\Quote.cs" />
     <Compile Include="Entities\Direction.cs" />
-    <Compile Include="Entities\Order\Order.cs" />
-    <Compile Include="Entities\Order\OrderDetails.cs" />
-    <Compile Include="Entities\Order\OrderEventArgs.cs" />
-    <Compile Include="Entities\Order\OrderMode.cs" />
-    <Compile Include="Entities\Order\OrderPeriod.cs" />
-    <Compile Include="Entities\Order\OrderStatus.cs" />
-    <Compile Include="Entities\Order\OrderTimeType.cs" />
-    <Compile Include="Entities\Trade\Trade.cs" />
-    <Compile Include="Entities\Trade\TradeDetails.cs" />
-    <Compile Include="Entities\Trade\TradeEventArgs.cs" />
-    <Compile Include="Entities\Trade\TradeKind.cs" />
-    <Compile Include="Entities\Trade\TradeMode.cs" />
-    <Compile Include="Entities\Trade\TradePeriod.cs" />
-    <Compile Include="Entities\Trade\TradeTimeType.cs" />
-    <Compile Include="TransactionGateway.cs" />
+    <Compile Include="Entities\Transaction\Order\ExecCondition.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfo.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfoDetails.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfoEventArgs.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfoMode.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfoPeriod.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfoStatus.cs" />
+    <Compile Include="Entities\OrderInfo\OrderInfoTimeType.cs" />
+    <Compile Include="Entities\Transaction\Quote\StopQuote.cs" />
+    <Compile Include="Entities\Transaction\Order\StopOrderKind.cs" />
+    <Compile Include="Entities\Transaction\Order\StopPriceCondition.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfo.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfoDetails.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfoEventArgs.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfoKind.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfoMode.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfoPeriod.cs" />
+    <Compile Include="Entities\TradeInfo\TradeInfoTimeType.cs" />
+    <Compile Include="Entities\Transaction\Order\Order.cs" />
+    <Compile Include="Entities\Transaction\Order\StopOrder.cs" />
+    <Compile Include="Components\TransactionBuilder.cs" />
+    <Compile Include="Entities\Transaction\Quote\TakeAndStopQuote.cs" />
+    <Compile Include="Entities\Transaction\TransactionEventArgs.cs" />
+    <Compile Include="Entities\Transaction\Order\Units.cs" />
+    <Compile Include="Gateway.cs" />
     <Compile Include="Internals\EntryPoint.cs" />
     <Compile Include="Internals\ExecHelper.cs" />
+    <Compile Include="Internals\ExtensionHelper.cs" />
     <Compile Include="Internals\OrderEntryPoint.cs" />
     <Compile Include="Internals\TradeEntryPoint.cs" />
     <Compile Include="Internals\TypeConverter.cs" />
@@ -63,10 +79,11 @@
     </Compile>
     <Compile Include="ReturnValues\CallResult.cs" />
     <Compile Include="ReturnValues\ReturnValue.cs" />
-    <Compile Include="ReturnValues\TransactionCallResult.cs" />
-    <Compile Include="Watchers\ConnectionWatcher.cs" />
-    <Compile Include="Watchers\OrderWatcher.cs" />
-    <Compile Include="Watchers\TradeWatcher.cs" />
+    <Compile Include="Entities\Transaction\TransactionCallResult.cs" />
+    <Compile Include="Components\ConnectionListener.cs" />
+    <Compile Include="Components\OrderInfoListener.cs" />
+    <Compile Include="Components\TradeInfoListener.cs" />
+    <Compile Include="Components\TransactionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources.resx">
@@ -74,6 +91,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

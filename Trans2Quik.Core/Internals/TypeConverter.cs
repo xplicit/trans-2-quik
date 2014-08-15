@@ -1,20 +1,23 @@
 ﻿namespace Trans2Quik.Core.Internals
 {
     using System;
+    using System.Globalization;
     using System.Runtime.InteropServices.ComTypes;
 
     internal static class TypeConverter
     {
-        public static OrderStatus GetStatus(int statusCode)
+        public static readonly string CONST_AmountFormat = "#0.00";
+
+        public static OrderInfoStatus GetStatus(int statusCode)
         {
             switch (statusCode)
             {
-                case (int)OrderStatus.Active:
-                    return OrderStatus.Active;
-                case (int)OrderStatus.Withdrawn:
-                    return OrderStatus.Withdrawn;
+                case (int)OrderInfoStatus.Active:
+                    return OrderInfoStatus.Active;
+                case (int)OrderInfoStatus.Withdrawn:
+                    return OrderInfoStatus.Withdrawn;
                 default:
-                    return OrderStatus.Completed;
+                    return OrderInfoStatus.Completed;
             }
         }
 
@@ -54,6 +57,18 @@
             }
 
             return System.Text.Encoding.Default.GetString(str, 0, count);
+        }
+
+        public static string AmountToString(decimal amount, bool round = false)
+        {
+            var rounded = round ? RoundedAmount(amount) : amount;
+            var res = rounded.ToString(CONST_AmountFormat, CultureInfo.InvariantCulture);
+            return string.IsNullOrEmpty(res) ? "0" : res;
+        }
+
+        public static decimal RoundedAmount(decimal amount)
+        {
+            return Math.Round(amount, 2, MidpointRounding.AwayFromZero);
         }
     }
 }
