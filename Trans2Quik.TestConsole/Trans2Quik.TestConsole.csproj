@@ -42,7 +42,8 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Trans2Quik.Core">
+    <Reference Include="Trans2Quik.Core, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Trans2Quik.Adapter.1.0.0\lib\net45\Trans2Quik.Core.dll</HintPath>
     </Reference>
   </ItemGroup>
