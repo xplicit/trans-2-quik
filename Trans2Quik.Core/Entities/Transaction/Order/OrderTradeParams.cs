@@ -22,5 +22,9 @@
             this.Quantity = quantity;
             this.Price = price;
         }
+        public OrderTradeParams(string classCode, string secCode, Direction direction, int quantity, decimal price = decimal.Zero)
+            : this(new Security(classCode, secCode), direction, quantity, price)
+        {
+        }
     }
 }

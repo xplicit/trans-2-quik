@@ -60,12 +60,11 @@
     <Compile Include="Entities\TradeInfo\TradeInfoTimeType.cs" />
     <Compile Include="Entities\Transaction\Order\Order.cs" />
     <Compile Include="Entities\Transaction\Order\StopOrder.cs" />
-    <Compile Include="Components\TransactionBuilder.cs" />
+    <Compile Include="Internals\TransactionBuilder.cs" />
     <Compile Include="Entities\Transaction\TransactionEventArgs.cs" />
     <Compile Include="Entities\Transaction\Order\Units.cs" />
     <Compile Include="Gateway.cs" />
     <Compile Include="Internals\EntryPoint.cs" />
-    <Compile Include="Internals\ExecHelper.cs" />
     <Compile Include="Internals\ExtensionHelper.cs" />
     <Compile Include="Internals\OrderEntryPoint.cs" />
     <Compile Include="Internals\TradeEntryPoint.cs" />

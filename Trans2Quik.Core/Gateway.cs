@@ -8,8 +8,8 @@
         private readonly OrderInfoListener orderInfoListener;
         private readonly TradeInfoListener tradeInfoListener;
         private readonly TransactionManager transactionManager;
+        private readonly TransactionBuilder transactionBuilder;
 
-        protected bool TransactionsAsyncMode { get; private set; }
         protected string ClassCode { get; private set; }
         protected string SecurityCode { get; private set; }
 
@@ -25,18 +25,60 @@
         public event EventHandler<TradeInfoEventArgs> TradeChanged;
         public event EventHandler<TransactionEventArgs> NewTransaction;
 
-        public Gateway(string pathToQuik, bool transactionsAsyncMode = true)
+        public Gateway(string pathToQuik, string account)
         {
-            this.TransactionsAsyncMode = transactionsAsyncMode;
             this.connectionListener = new ConnectionListener(pathToQuik);
             this.orderInfoListener = new OrderInfoListener();
             this.tradeInfoListener = new TradeInfoListener();
-            this.transactionManager = new TransactionManager(this.TransactionsAsyncMode);
+            this.transactionManager = new TransactionManager(true);
+            this.transactionBuilder = new TransactionBuilder(account);
 
             this.connectionListener.ConnectionStatusChanged += ConnectionStatusChanged;
             this.orderInfoListener.OrderStatusChanged += OnOrderChanged;
             this.tradeInfoListener.TradeStatusChanged += OnTradeChanged;
             this.transactionManager.TransactionAsyncReply += TransactionAsyncReply;
+        }
+
+        public bool SendOrder(string classCode, string secCode, Direction direction, int quantity, decimal price = decimal.Zero)
+        {
+            var tradeParams = new OrderTradeParams(classCode,secCode, direction, quantity, price);
+            return this.SendOrder(tradeParams);
+        }
+
+        public bool SendOrder(OrderTradeParams tradeParams)
+        {
+            var txn = this.transactionBuilder.NewOrder(tradeParams);
+            return this.SendTransaction(txn.ToString());
+        }
+
+        public bool SendStopLimitOrder(StopOrderTradeParams tradeParams)
+        {
+            var txn = this.transactionBuilder.NewStopLimitOrder(tradeParams);
+            return this.SendTransaction(txn.ToString());
+        }
+
+        public bool SendTakeProfitOrder(StopOrderTradeParams tradeParams)
+        {
+            var txn = this.transactionBuilder.NewTakeProfitOrder(tradeParams);
+            return this.SendTransaction(txn.ToString());
+        }
+
+        public bool SendTakeProfitAndStopLimitOrder(StopOrderTradeParams tradeParams)
+        {
+            var txn = this.transactionBuilder.NewTakeProfitAndStopLimitOrder(tradeParams);
+            return this.SendTransaction(txn.ToString());
+        }
+
+        public bool KillOrder(Security security, string orderKey)
+        {
+            var txn = this.transactionBuilder.KillOrder(security, orderKey);
+            return this.SendTransaction(txn.ToString());
+        }
+
+        public bool KillStopOrder(Security security, string orderKey)
+        {
+            var txn = this.transactionBuilder.KillStopOrder(security, orderKey);
+            return this.SendTransaction(txn.ToString());
         }
 
         public bool Start(string classCode = "", string securityCode = "")
@@ -65,14 +107,7 @@
 
         public bool SendTransaction(string transactionString)
         {
-            if (this.TransactionsAsyncMode)
-            {
-                return this.transactionManager.SendAsyncTransaction(transactionString);
-            }
-
-            var res = this.transactionManager.SendSyncTransaction(transactionString);
-            this.TransactionAsyncReply(this, new TransactionEventArgs(res));
-            return res.ReturnValue.IsSuccess;
+            return this.transactionManager.SendAsyncTransaction(transactionString);
         }
 
         private bool Subscribe(string classCode, string securityCode)
