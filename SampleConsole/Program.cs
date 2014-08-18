@@ -1,9 +1,7 @@
-trans-2-quik
-============
-
-Trans2Quik .NET adapter for Quik trade terminal.
-
-Sample code:
+﻿namespace SampleConsole
+{
+    using System;
+    using Trans2Quik.Core;
 
     class Program
     {
@@ -24,9 +22,4 @@ Sample code:
             Console.WriteLine("Result: {0}", e.TransactionResult);
         }
     }
-
-
-    
-
-
-
+}
