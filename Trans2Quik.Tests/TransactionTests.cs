@@ -121,10 +121,10 @@
         public void Sample01()
         {
             // Connect to the Quik
-            var quikListener = new ConnectionListener(@"Q:\PSBQuik");
+            var quikListener = new ConnectionListener(@"C:\Quik");
             quikListener.Connect();
             
-            var txnBuilder = new TransactionBuilder("L01+00000F00");
+            var txnBuilder = new TransactionBuilder("LXX+XXXXXXXXX");
             
             // Buy 10 "SBRF" by Market
             var order = txnBuilder.NewOrder(new OrderTradeParams("TQBR", "SBER", Direction.Buy, 1));
@@ -140,20 +140,21 @@
         [Test]
         public void Sample02()
         {
-            var gateway = new Gateway(@"Q:\PSBQuik", "L01+00000F00");
+            var gateway = new Gateway(@"C:\Quik", "LXX+XXXXXXXXX");
             gateway.NewTransaction += OnNewTransaction;
             gateway.Start();
             
             // Купить 10 акций Сбербанка по рыночной цене
-            gateway.SendOrder("TQBR", "SBER", Direction.Buy, 1); 
+            gateway.SendOrder("TQBR", "SBER", Direction.Buy, 1);
 
+            Console.ReadLine();
             Thread.Sleep(10000);
         }
 
         [Test]
         public void Sample03()
         {
-            var gateway = new Gateway(@"Q:\PSBQuik", "L01+00000F00");
+            var gateway = new Gateway(@"C:\Quik", "LXX+XXXXXXXXX");
             gateway.NewTransaction += OnNewTransaction;
             gateway.Start();
 

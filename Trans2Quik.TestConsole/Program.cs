@@ -11,7 +11,7 @@
             try
             {
 
-                var gateway = new Gateway(@"Q:\PSBQuik", "L01+00000F00");
+                var gateway = new Gateway(@"C:\Quik", "LXX+XXXXXXXXX");
                 gateway.OrderChanged += OrderChanged;
                 gateway.TradeChanged += TradeChanged;
                 gateway.NewTransaction += NewTransaction;  

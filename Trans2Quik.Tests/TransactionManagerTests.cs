@@ -28,7 +28,7 @@
             Assert.IsTrue(cw.Connect());
 
             var tw = new TransactionManager();
-            var txn = "ACCOUNT=L01+00000F00; TYPE=M; TRANS_ID=6546546; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION=B; PRICE=0; QUANTITY=1;";
+            var txn = "ACCOUNT=LXX+XXXXXXXXX; TYPE=M; TRANS_ID=6546546; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION=B; PRICE=0; QUANTITY=1;";
             var res = tw.SendSyncTransaction(txn);
             Console.WriteLine("{0}", res);
             Assert.IsTrue(res.ReturnValue.IsSuccess);
@@ -42,7 +42,7 @@
 
             var tw = new TransactionManager(true);
             tw.TransactionAsyncReply += TransactionAsyncReply;
-            var txn = "ACCOUNT=L01+00000F00; TYPE=M; TRANS_ID=6546547; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION=S; PRICE=0; QUANTITY=1;";
+            var txn = "ACCOUNT=LXX+XXXXXXXXX; TYPE=M; TRANS_ID=6546547; CLASSCODE=TQBR; SECCODE=SBER; ACTION=NEW_ORDER; OPERATION=S; PRICE=0; QUANTITY=1;";
             var res = tw.SendAsyncTransaction(txn);
             Assert.IsTrue(res);
             Console.WriteLine("Waiting for response...");
