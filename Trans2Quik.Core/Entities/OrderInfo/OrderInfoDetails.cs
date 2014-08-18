@@ -149,26 +149,25 @@
                 return od;
             }
 
-            // TODO: use async await
-            ExecHelper.Do(() => { od.Qty = OrderEntryPoint.Qty(orderDescriptor); });
-            ExecHelper.Do(() => { od.Date = OrderEntryPoint.Date(orderDescriptor); });
-            ExecHelper.Do(() => { od.Time = OrderEntryPoint.Time(orderDescriptor); });
-            ExecHelper.Do(() => { od.OrderDateTime = OrderEntryPoint.DateTime(orderDescriptor, (int)infoTimeType); });
-            ExecHelper.Do(() => { od.ActivationTime = OrderEntryPoint.ActivationTime(orderDescriptor); });
-            ExecHelper.Do(() => { od.WithdrawTime = OrderEntryPoint.WithdrawTime(orderDescriptor); });
-            ExecHelper.Do(() => { od.Expiry = OrderEntryPoint.Expiry(orderDescriptor); });
-            ExecHelper.Do(() => { od.AccuredInt = OrderEntryPoint.AccuredInt(orderDescriptor); });
-            ExecHelper.Do(() => { od.Yield = OrderEntryPoint.Yield(orderDescriptor); });
-            ExecHelper.Do(() => { od.Uid = OrderEntryPoint.Uid(orderDescriptor); });
-            ExecHelper.Do(() => { od.VisibleQty = OrderEntryPoint.VisibleQty(orderDescriptor); });
-            ExecHelper.Do(() => { od.Period = (OrderInfoPeriod)OrderEntryPoint.Period(orderDescriptor); });
-            ExecHelper.Do(() => { od.FileTime = TypeConverter.GetDateTime(OrderEntryPoint.FileTime(orderDescriptor)); });
-            ExecHelper.Do(() => { od.WithdawFileTime = TypeConverter.GetDateTime(OrderEntryPoint.WithdawFileTime(orderDescriptor)); });
-            ExecHelper.Do(() => { od.UserId = OrderEntryPoint.UserId(orderDescriptor); });
-            ExecHelper.Do(() => { od.Account = OrderEntryPoint.Account(orderDescriptor); });
-            ExecHelper.Do(() => { od.BrokerRef = OrderEntryPoint.BrokerRef(orderDescriptor); });
-            ExecHelper.Do(() => { od.ClientCode = OrderEntryPoint.ClientCode(orderDescriptor); });
-            ExecHelper.Do(() => { od.FirmId = OrderEntryPoint.FirmId(orderDescriptor); });
+            od.Qty = OrderEntryPoint.Qty(orderDescriptor);
+            od.Date = OrderEntryPoint.Date(orderDescriptor);
+            od.Time = OrderEntryPoint.Time(orderDescriptor);
+            od.OrderDateTime = OrderEntryPoint.DateTime(orderDescriptor, (int)infoTimeType);
+            od.ActivationTime = OrderEntryPoint.ActivationTime(orderDescriptor);
+            od.WithdrawTime = OrderEntryPoint.WithdrawTime(orderDescriptor);
+            od.Expiry = OrderEntryPoint.Expiry(orderDescriptor);
+            od.AccuredInt = OrderEntryPoint.AccuredInt(orderDescriptor);
+            od.Yield = OrderEntryPoint.Yield(orderDescriptor);
+            od.Uid = OrderEntryPoint.Uid(orderDescriptor);
+            od.VisibleQty = OrderEntryPoint.VisibleQty(orderDescriptor);
+            od.Period = (OrderInfoPeriod)OrderEntryPoint.Period(orderDescriptor);
+            od.FileTime = TypeConverter.GetDateTime(OrderEntryPoint.FileTime(orderDescriptor));
+            od.WithdawFileTime = TypeConverter.GetDateTime(OrderEntryPoint.WithdawFileTime(orderDescriptor));
+            od.UserId = OrderEntryPoint.UserId(orderDescriptor);
+            od.Account = OrderEntryPoint.Account(orderDescriptor);
+            od.BrokerRef = OrderEntryPoint.BrokerRef(orderDescriptor);
+            od.ClientCode = OrderEntryPoint.ClientCode(orderDescriptor);
+            od.FirmId = OrderEntryPoint.FirmId(orderDescriptor);
 
             return od;
         }

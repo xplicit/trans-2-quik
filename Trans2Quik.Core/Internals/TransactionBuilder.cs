@@ -1,6 +1,6 @@
 ﻿namespace Trans2Quik.Core
 {
-    public class TransactionBuilder
+    internal class TransactionBuilder
     {
         public int NextTxnId { get; private set; }
         public string Account { get; private set; }

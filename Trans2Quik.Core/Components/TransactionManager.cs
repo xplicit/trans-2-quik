@@ -13,7 +13,7 @@
 
         public event EventHandler<TransactionEventArgs> TransactionAsyncReply;
 
-        public TransactionManager(bool asyncMode = true)
+        public TransactionManager(bool asyncMode = false)
         {
             this.AsyncMode = asyncMode;
 

@@ -11,7 +11,7 @@
         [Test]
         public void CanWatchOrders()
         {
-            var tg = new Gateway(Mother.CONST_PathToQuik);
+            var tg = new Gateway(Mother.CONST_PathToQuik, Mother.CONST_Account);
             tg.OrderChanged += OrderChanged;
             tg.Start();
             
