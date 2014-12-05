@@ -39,9 +39,9 @@
             this.transactionManager.TransactionAsyncReply += TransactionAsyncReply;
         }
 
-        public bool SendOrder(string classCode, string secCode, Direction direction, int quantity, decimal price = decimal.Zero)
+        public bool SendOrder(string classCode, string secCode, int secPoints, Direction direction, int quantity, decimal price = decimal.Zero)
         {
-            var tradeParams = new OrderTradeParams(classCode,secCode, direction, quantity, price);
+            var tradeParams = new OrderTradeParams(classCode,secCode, secPoints, direction, quantity, price);
             return this.SendOrder(tradeParams);
         }
 

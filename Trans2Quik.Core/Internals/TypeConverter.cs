@@ -6,7 +6,7 @@
 
     internal static class TypeConverter
     {
-        public static readonly string CONST_AmountFormat = "#0.00";
+        public static readonly string CONST_AmountFormat = "F";
 
         public static OrderInfoStatus GetStatus(int statusCode)
         {
@@ -59,16 +59,16 @@
             return System.Text.Encoding.Default.GetString(str, 0, count);
         }
 
-        public static string AmountToString(decimal amount, bool round = false)
+        public static string AmountToString(decimal amount, int decimalPoints = 2, bool round = false)
         {
-            var rounded = round ? RoundedAmount(amount) : amount;
-            var res = rounded.ToString(CONST_AmountFormat, CultureInfo.InvariantCulture);
+            var rounded = round ? RoundedAmount(amount, decimalPoints) : amount;
+			var res = rounded.ToString(CONST_AmountFormat+decimalPoints, CultureInfo.InvariantCulture);
             return string.IsNullOrEmpty(res) ? "0" : res;
         }
 
-        public static decimal RoundedAmount(decimal amount)
+		public static decimal RoundedAmount(decimal amount, int decimalPoints)
         {
-            return Math.Round(amount, 2, MidpointRounding.AwayFromZero);
+			return Math.Round(amount, decimalPoints, MidpointRounding.AwayFromZero);
         }
     }
 }

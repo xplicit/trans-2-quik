@@ -24,6 +24,11 @@
         /// Код инструмента
         /// </summary>
         public string SecCode { get; set; }
+
+		/// <summary>
+		/// Количество знаков после запятой цены инструмента
+		/// </summary>
+		public int SecPoints { get; set; }
         
         /// <summary>
         /// Номер счета трейдера
@@ -129,7 +134,7 @@
             sb.AppendKey("CLIENT_CODE", this.ClientCode);
             sb.AppendKey("FIRM_ID", this.FirmId);
             sb.AppendKey("QUANTITY", this.Quantity);
-            sb.AppendKey("PRICE", this.Price);
+			sb.AppendKey("PRICE", this.Price, this.SecPoints);
             sb.AppendKey("OPERATION", this.Operation);
             sb.AppendOrderType("TYPE", this.IsLimitOrder);
             sb.AppendKey("MARKET_MAKER_ORDER", this.IsMarketMaker);

@@ -71,13 +71,13 @@
                 if (cki.Key == ConsoleKey.B)
                 {
                     // Buy
-                    gateway.SendOrder("TQBR", "SBER", Direction.Buy, 1);
+                    gateway.SendOrder("SPBFUT", "RIZ4", 0,  Direction.Buy, 1, 93270);
                 }
 
                 if (cki.Key == ConsoleKey.S)
                 {
                     // Sell
-                    gateway.SendOrder("TQBR", "SBER", Direction.Sell, 1);
+                    gateway.SendOrder("SPBFUT", "RIZ4", 0 ,Direction.Sell, 94300);
                 }
 
             } while (cki.Key != ConsoleKey.Escape);

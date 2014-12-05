@@ -14,14 +14,14 @@
                 sb.AppendFormat(CONST_Format, key, value);
             }
         }
-        public static void AppendKey(this StringBuilder sb, string key, decimal? value)
+		public static void AppendKey(this StringBuilder sb, string key, decimal? value, int decimalPoints = 2)
         {
             if (!value.HasValue)
             {
                 return;
             }
 
-            sb.AppendFormat(CONST_Format, key, TypeConverter.AmountToString(value.Value));
+            sb.AppendFormat(CONST_Format, key, TypeConverter.AmountToString(value.Value, decimalPoints));
         }
 
         public static void AppendKey(this StringBuilder sb, string key, int? value)
