@@ -14,7 +14,8 @@
                 sb.AppendFormat(CONST_Format, key, value);
             }
         }
-		public static void AppendKey(this StringBuilder sb, string key, decimal? value, int decimalPoints = 2)
+
+        public static void AppendKey(this StringBuilder sb, string key, decimal? value, int decimalPoints = 2)
         {
             if (!value.HasValue)
             {

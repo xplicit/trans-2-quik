@@ -62,13 +62,13 @@
         public static string AmountToString(decimal amount, int decimalPoints = 2, bool round = false)
         {
             var rounded = round ? RoundedAmount(amount, decimalPoints) : amount;
-			var res = rounded.ToString(CONST_AmountFormat+decimalPoints, CultureInfo.InvariantCulture);
+            var res = rounded.ToString(CONST_AmountFormat+decimalPoints, CultureInfo.InvariantCulture);
             return string.IsNullOrEmpty(res) ? "0" : res;
         }
 
-		public static decimal RoundedAmount(decimal amount, int decimalPoints)
+        public static decimal RoundedAmount(decimal amount, int decimalPoints)
         {
-			return Math.Round(amount, decimalPoints, MidpointRounding.AwayFromZero);
+            return Math.Round(amount, decimalPoints, MidpointRounding.AwayFromZero);
         }
     }
 }

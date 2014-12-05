@@ -23,7 +23,7 @@
             this.Price = price;
         }
         public OrderTradeParams(string classCode, string secCode, int secPoints, Direction direction, int quantity, decimal price = decimal.Zero)
-			: this(new Security(classCode, secCode, secPoints), direction, quantity, price)
+            : this(new Security(classCode, secCode, secPoints), direction, quantity, price)
         {
         }
     }

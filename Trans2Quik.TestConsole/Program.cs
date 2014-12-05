@@ -6,12 +6,14 @@
 
     class Program
     {
+        static readonly Security ticker = new Security ("SPBFUT", "RIZ4", 0);
+
         static void Main(string[] args)
         {
             try
             {
 
-                var gateway = new Gateway(@"C:\Quik", "LXX+XXXXXXXXX");
+                var gateway = new Gateway(@"C:\Quik", "SPBFUTXXXXX");
                 gateway.OrderChanged += OrderChanged;
                 gateway.TradeChanged += TradeChanged;
                 gateway.NewTransaction += NewTransaction;  
@@ -71,13 +73,13 @@
                 if (cki.Key == ConsoleKey.B)
                 {
                     // Buy
-                    gateway.SendOrder("SPBFUT", "RIZ4", 0,  Direction.Buy, 1, 93270);
+                    gateway.SendOrder(ticker, Direction.Buy, 1, 93270);
                 }
 
                 if (cki.Key == ConsoleKey.S)
                 {
                     // Sell
-                    gateway.SendOrder("SPBFUT", "RIZ4", 0 ,Direction.Sell, 94300);
+                    gateway.SendOrder(ticker, Direction.Sell, 1, 94500);
                 }
 
             } while (cki.Key != ConsoleKey.Escape);
